@@ -33,17 +33,7 @@ public class Split {
  		String mid = first[1];//first value of the array is assigned to a string and returned 
  		return mid;//index 0 = pineapple, index 1 = what we want, index 2 = cheese
  	}
- 	//part 2 alternative easier way
  	
-<<<<<<< HEAD
- 	public static String sandwich3(String info2) {
- 		 String[] a = info2.split(" ");//splits at bread and and assigns to string
- 		 
- 		//two loops for incre-decrementing loops to find bread
- 		 //declare first bread as i+1 
- 	}
-=======
->>>>>>> branch 'master' of https://github.com/mhuang261/Fall2019V2.git
  	public static String sandwich3(String sandwich) {
 		 String mid = "";
  		 String[] ingred = sandwich.split("bread");//splits at bread

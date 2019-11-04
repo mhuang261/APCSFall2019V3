@@ -126,8 +126,17 @@ public class Calculate {
 			
 		}
 		
-		for (int i = 0; i < expo; i++) {
-			answer = answer + 1 * base; 
+		if (expo == 0 && base != 0) {
+			return 1;
+			
+		}
+		
+		if (expo == 0 && base == 0) {
+			return 0;
+		}
+		 
+		for (int i = 0; i < expo; i++) { // if b = 2 and e = 3 then will run 3 times
+			answer = answer + 1 * base; //1*2, then 2*2 then 4*2
 
 		}
 		return answer;
@@ -172,17 +181,26 @@ public class Calculate {
 
 	public static int gcf(int a, int b) {
 		int greatestcommon = 1;
+		int smaller = 0;
 
-		if ( a<1 || b<1 ) {//if or b is less than 1, throw exception
+		if (a<=b) {//finds the smaller of a and b (want smaller)
+			smaller = a;
+		}else {
+			smaller = b;
+		}
+
+		if ( a<1 || b<1 ) {//if a or b is less than 1, execute code for negative gcf
 			
-			for (int i = -1; i >= b && i >= a; i--) {
-				if (a % i == 0 && b % i == 0) {
+			//-1 runs to -5, 5 times i = -5, a = -5, b = 10
+			for (int i = -1; i >= smaller; i--) {// i starts at -1, if -1 is greater than a and b then decrement until finds the larger of a and b
+				
+				if (a % i == 0 && b % i == 0) { //if a and b modulo have no remainder, they are even and then return -i
 					greatestcommon = -i;
 				}
 			}
 		}
-
-		for (int i = 1; i <= b && i <= a; i++) {
+		
+		for (int i = 1; i >= smaller; i++) {
 			if (a % i == 0 && b % i == 0) {
 				greatestcommon = i;
 			} 
@@ -226,7 +244,7 @@ if (input<0) {
 			
 			double rounding= round2(dis);
 			
-			return " " + rounding + " ";
+			return rounding + " ";
 			
 		}else if (discriminant(a, b, c) > 0 ) {
 			double disPre = Math.sqrt(discriminant(a, b, c)); 

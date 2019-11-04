@@ -26,7 +26,7 @@ public class FracCalc {
         String operand2 = "";
         String operator = "";
         
-        String[] arrOfStr = input.split(" ");
+        String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
         operand1 = arrOfStr[0];
         operator = arrOfStr[1];
         operand2 = arrOfStr[2];
@@ -34,7 +34,7 @@ public class FracCalc {
 
     	// TODO: Implement this function to produce the solution to the input
         
-        return "";
+        return operand2;
     }
 
     // TODO: Fill in the space below with any helper methods that you think you will need

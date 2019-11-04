@@ -53,7 +53,7 @@ public class ArrayLab {
 		System.out.print(Arrays.toString(remove(arr3, 2)));
 		//method 4
 		int[] arr4 = {1, 2, 3, 4, 5};
-		System.out.print();
+		System.out.print(sumEven(arr4));
 	}
 	
 	

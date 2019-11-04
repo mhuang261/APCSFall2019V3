@@ -7,9 +7,11 @@ public class FracCalc {
     public static void main(String[] args) 
     {
     	Scanner console = new Scanner(System.in);
-    	produceAnswer(console.nextLine());
+    	System.out.println("fraction please:");
+    	System.out.print(produceAnswer(console.nextLine()));
+    	
         // TODO: Read the input from the user and call produceAnswer with an equation
-
+    	
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code

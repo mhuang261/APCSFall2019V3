@@ -76,7 +76,6 @@ public class ArrayLab {
 		//method 5
 		int[] arr5 = {1, 2, 3, 4, 5};
 		rotateRight(arr5);
-		
 	}
 	
 	

@@ -58,7 +58,31 @@ public class ArrayLab {
 		answerArr5[0] = temp;
 		System.out.println(Arrays.toString(answerArr5));
 	}
-	//main method
+	
+	public static void main(String[] args) {
+		int[] a1 = {5, 10, 15, 20, 25, 30, 35, 40};
+		int[] a2 = {7, 14, 21, 28, 35, 42, 49, 56};
+		int[] sumArr = {1, 2, 3, 4, 5};
+		int[] appendArr = {1, 2, 3, 4, 5};
+		int[] removeArr = {1, 2, 3, 4, 5};
+		int appendNum = 200;
+		int removeIdx = 5;
+		int sumOfEvens = 0;
+		
+		sumArr = sum(a1, a2); //this is sumArr
+		appendArr = append(a1, appendNum); //this is appendArr
+		removeArr = remove(a2, removeIdx); //etc
+		sumOfEvens = sumEven(appendArr); 
+		
+		System.out.println(Arrays.toString(sumArr));
+		System.out.println(Arrays.toString(appendArr));
+		System.out.println(Arrays.toString(removeArr));
+		System.out.println(sumOfEvens);
+		System.out.println(Arrays.toString(a1));
+	}
+}
+	//main method testing
+	/*
 	public static void main(String[] args) {
 		//method 1
 		int[]arr1 = {1, 2, 3, 4, 5};
@@ -80,6 +104,13 @@ public class ArrayLab {
 	
 	
 }
+*\
+	
+	
+	
+	
+	
+	
 /*
 1) Write a method sum that accepts two arrays of integers arr1 and arr2 and returns an array of integers, in which every element is the sum of the elements at that index for the arrays arr1 and arr2. You can assume arrays arr1 and arr2 have at least one element each and are the same length.
 public static int[] sum(int[] arr1, int[] arr2) {

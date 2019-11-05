@@ -35,9 +35,28 @@ public class ArrayLab {
 			}
 			return Answer;
 	}
-	
+	//method 4
 	public static int sumEven(int[] arr4) {
-
+		int sum = 0;
+		for (int i = 0; i<arr4.length; i+=2) {
+			sum+=arr4[i];
+		}
+		return sum;
+	}
+	//method 5
+	public static void rotateRight(int[] arr5) {
+		int temp = 0;
+		int[] answerArr5 = new int[arr5.length - 1];
+		answerArr5 = arr5;
+		temp = arr5[arr5.length-1]; //stores last in temp
+		
+		for (int i = arr5.length -1; i > 0 ; i-- ) { //runs the loop 4 times 
+			answerArr5[i] = answerArr5[i-1];
+			
+		}
+		//need to add back on the temp
+		answerArr5[0] = temp;
+		System.out.println(Arrays.toString(answerArr5));
 	}
 	//main method
 	public static void main(String[] args) {
@@ -50,10 +69,14 @@ public class ArrayLab {
 		System.out.println(Arrays.toString(append(arr, 5)));
 		//method 3
 		int[] arr3 = {1, 2, 3, 4, 5};
-		System.out.print(Arrays.toString(remove(arr3, 2)));
+		System.out.println(Arrays.toString(remove(arr3, 2)));
 		//method 4
 		int[] arr4 = {1, 2, 3, 4, 5};
-		System.out.print();
+		System.out.println(sumEven(arr4));
+		//method 5
+		int[] arr5 = {1, 2, 3, 4, 5};
+		rotateRight(arr5);
+		
 	}
 	
 	

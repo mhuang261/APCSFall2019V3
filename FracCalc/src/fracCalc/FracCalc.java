@@ -7,24 +7,20 @@ import java.util.*;
 
 public class FracCalc {
 
-    public static void main(String[] args) 
+      public static void main(String[] args) 
     {
     	Scanner console = new Scanner(System.in);
-    	boolean quit = false;
+    	String quit = "";
     	String ans = "";
     	
-    	do {
-        	System.out.println("Input two fractions and the operation desired. (type the word quit to quit)");
+    	while (!quit.equalsIgnoreCase("quit")) {
+        	System.out.println("Input two fractions and the operation desired.");
     		ans = console.nextLine();
     		System.out.println(produceAnswer(ans));
-	
-    		if (console.nextLine().equalsIgnoreCase("quit")) {//if quit then will not continue
-    			quit = true;
-    		}
-    	} while (quit == true);
-    	
-    	
-        // TODO: Read the input from the user and call produceAnswer with an equation   	
+    		System.out.println("continue? (quit to quit)");
+		    quit = console.nextLine();	
+    	} 
+     // TODO: Read the input from the user and call produceAnswer with an equation   	
     }
     
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code

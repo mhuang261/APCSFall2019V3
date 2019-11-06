@@ -13,17 +13,15 @@ public class FracCalc {
     	boolean quit = false;
     	String ans = "";
     	
-    	System.out.println("fraction please:");
-
-    	while (quit = false) {
-        	System.out.println("fraction please:");
+    	do {
+        	System.out.println("Input two fractions and the operation desired. (type the word quit to quit)");
     		ans = console.nextLine();
     		System.out.println(produceAnswer(ans));
-    		
-    		if (console.nextLine().equals("quit")) {//if quit then will not continue
+	
+    		if (console.nextLine().equalsIgnoreCase("quit")) {//if quit then will not continue
     			quit = true;
     		}
-    	}	
+    	} while (quit == true);
     	
     	
         // TODO: Read the input from the user and call produceAnswer with an equation   	

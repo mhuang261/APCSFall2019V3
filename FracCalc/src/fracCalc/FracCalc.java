@@ -145,17 +145,28 @@ public class FracCalc {
         int num2Int = Integer.parseInt(num2);
         int denom2Int = Integer.parseInt(denom2);
         
-        //MIXED NUMBER CONVERT TO IMPROPER IF 
-        if (whole2Int != 0) { // if the whole number is not zero, then will call change mixed number into improper fraction
+     
+        //MIXED NUMBER CONVERT TO IMPROPER TO ACCESS LCM EASIER
+       if (whole2Int != 0) { // if the whole number is not zero, then will call and change mixed number into improper fraction
 			num2Int = MixImp(whole2Int, num2Int, denom2Int);
 		}else if (whole1Int != 0) {
-			whole1Int = MixImp(whole1Int, num1Int, denom2Int);
+			num1Int = MixImp(whole1Int, num1Int, denom2Int); 
 		}
-
+       
+       //TESTING FOR OPERATORS
+       
+       if (operator.equals("+")) {
+    	   
+    	   
+       }
+       
+	   //PRINT STRING ANSWER
         return "whole:" + whole2Int + " " + "numerator:" + num2Int + " " + "denominator:" + denom2Int;
     }
     
 
+    
+    
     // TODO: Fill in the space below with any helper methods that you think you will need 
     //EXTRA METHODS GO HERE
     
@@ -166,7 +177,8 @@ public class FracCalc {
     	}
     	
     	//ADDITION
-        public static String add (int whole, int num, int denom) {
+        public static String add (int num1, int num2, int denom1, int denom2) {
+        	
         	
         	return "";
         }
@@ -187,6 +199,45 @@ public class FracCalc {
         	return "";
         }
         
+        //GCF   
+        public static int gcf(int a, int b) {
+    		int greatestcommon = 1;
+    		int smaller = 0;
+
+    		if ( a<1 || b<1 ) {//if a or b is less than 1, execute code for negative gcf
+    			
+    			//-1 runs to -5, 5 times i = -5, a = -5, b = 10
+    			for (int i = -1; i >= smaller; i--) {// i starts at -1, if -1 is greater than a and b then decrement until finds the larger of a and b
+    				
+    				if (a % i == 0 && b % i == 0) { //if a and b modulo have no remainder, they are even and then return -i
+    					greatestcommon = -i;
+    				}
+    			}
+    		}
+    		for (int i = 1; i >= smaller; i++) {
+    			if (a % i == 0 && b % i == 0) {
+    					greatestcommon = i;
+    			} 
+    			
+    			if (a<=b) {//finds the smaller of a and b (want smaller)
+        			smaller = a;
+        		}else {
+        			smaller = b;
+        		}
+    		}
+    		return greatestcommon;
+        
+        }
     
-    
+        //LCM (find gcf, x/gcf then multiply to y
+        public static int lcm (int denom1, int denom2) {
+        	int answer = 0;
+        	int gcf = 0;
+        	gcf = gcf(denom1, denom2);
+        	answer = (denom1/gcf) * denom2;
+        	
+        	return answer;
+        }
+
+
 }

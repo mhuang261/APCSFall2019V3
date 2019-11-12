@@ -215,35 +215,27 @@ public class FracCalc {
         	//IMPROP ANSWER TO MIXED NUM ANSWER
         	String whole = "";
         	String remain = "";
-        	int largestNum = 0;
-        	int smallerNum = 0;
-
+          	int diffOfNum= num1 - num2;
         	
-        	if (num1 > num2) {
-        		largestNum = num1;
-        		smallerNum = num2;
-        	}else {
-        		largestNum = num2;
-        		smallerNum = num2;
-        	}
-        	
-        	
-        	if ((largestNum - smallerNum) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
+        	if ((num1) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
         		if(num1 > num2) {
         		whole = ((num1-num2)/denom1) + ""; //dividing by ints gives no remainder
         		remain = ((num1-num2) % denom1) + "/" + denom1; //mod will find remainder, need the denom
-        		return whole + "_" + remain;//
+        		return whole + "_" + remain;
         	} else { 
         		whole = ((num2-num1)/denom1) + ""; //dividing by ints gives no remainder
         		remain = ((num2-num1) % denom1) + "/" + denom1; //mod will find remainder, need the denom
-        		return whole + "_" + remain;//
+        		return whole + "_" + remain;
         	}
+        		//RETURN FOR REGULAR FRACTION ANSWER
+        		/*
+            	if(num1 > num2) {
+            		return (num1 - num2) + "/" + lcm;
+            	}else {
+            		return (num2 - num1) + "/" + lcm;
+            	}
+        */
         	
-        	//RETURN 
-        	if(num1 > num2) {
-        		return (num1 - num2) + "/" + lcm;
-        	}else {
-        		return (num2 - num1) + "/" + lcm;
         	}
         }
         //MULTIPLICATION

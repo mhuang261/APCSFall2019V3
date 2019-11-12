@@ -217,26 +217,27 @@ public class FracCalc {
         	String remain = "";
           	int diffOfNum= num1 - num2;
         	
-        	if ((num1) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
+        	if ((num1) > lcm) { //tests for improper or not
+        		
         		if(num1 > num2) {
-        		whole = ((num1-num2)/denom1) + ""; //dividing by ints gives no remainder
-        		remain = ((num1-num2) % denom1) + "/" + denom1; //mod will find remainder, need the denom
+        		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
+        		remain = (diffOfNum % denom1) + "/" + denom1; //mod will find remainder, need the denom
         		return whole + "_" + remain;
         	} else { 
-        		whole = ((num2-num1)/denom1) + ""; //dividing by ints gives no remainder
-        		remain = ((num2-num1) % denom1) + "/" + denom1; //mod will find remainder, need the denom
+        		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
+        		remain = Math.abs((diffOfNum % denom1)) + "/" + denom1; //mod will find remainder 
         		return whole + "_" + remain;
+        		
         	}
-        		//RETURN FOR REGULAR FRACTION ANSWER
-        		/*
-            	if(num1 > num2) {
-            		return (num1 - num2) + "/" + lcm;
+        }
+        	//NORMAL CHECK
+        		if(num1 > num2) {
+            		return diffOfNum + "/" + lcm;
             	}else {
-            		return (num2 - num1) + "/" + lcm;
+            		return diffOfNum + "/" + lcm;
             	}
-        */
+            	
         	
-        	}
         }
         //MULTIPLICATION
         public static String mult (int num1, int denom1, int num2, int denom2) {

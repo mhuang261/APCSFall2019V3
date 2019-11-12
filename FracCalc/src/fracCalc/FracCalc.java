@@ -17,7 +17,7 @@ public class FracCalc {
         	System.out.println("Input two fractions and the operation desired.");
     		ans = console.nextLine();
     		System.out.println(produceAnswer(ans));
-    		System.out.println("continue? (quit to quit)");
+    		System.out.println("continue? (quit to quit, yes to continue)");
 		    quit = console.nextLine();	
     	} 
      // TODO: Read the input from the user and call produceAnswer with an equation   	
@@ -119,7 +119,6 @@ public class FracCalc {
         		whole2 = splitFrac2NumSingle[0]; 
         		num2 = splitFrac2NumSingle[1];
         		denom2 = splitFrac2[1];
-        		
         	}
         	
         	//CHECKS FOR WHOLE NUMBER LIKE 20 (INTEGER)
@@ -156,12 +155,19 @@ public class FracCalc {
        //TESTING FOR OPERATORS
        
        if (operator.equals("+")) {
+    	   return add(num1Int, num2Int, denom1Int, denom2Int);
     	   
-    	   
+       }else if (operator.equals("-")) {
+    	   return sub(num1Int, denom1Int, num2Int, denom2Int); //already improp at this point so no need for whole
+
+       }else if (operator.equals("*")) {
+    	   return mult(num1Int, denom1Int, num2Int, denom2Int);
+
+       }else {
+    	   return divide(num1Int, denom1Int, num2Int, denom2Int);
+
        }
        
-	   //PRINT STRING ANSWER
-        return "whole:" + whole2Int + " " + "numerator:" + num2Int + " " + "denominator:" + denom2Int;
     }
     
 
@@ -177,26 +183,80 @@ public class FracCalc {
     	}
     	
     	//ADDITION
-        public static String add (int num1, int num2, int denom1, int denom2) {
+        public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
+        	//CALCULATION
+        	int gcf = gcf(denom1, denom2);
+        	int lcm = (denom1/gcf) * denom2; //lcm is now denom 
+        	num1 = num1 * (lcm/denom1);
+        	num2 = num2 * (lcm/denom2);
         	
+        	//RETURN IMPROP ANSWER TO MIXED NUM ANSWER
+        	String whole = "";
+        	String remain = "";
         	
-        	return "";
+        	if ((num1+num2) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
+        		whole = ((num1+num2)/denom1) + ""; //dividing by ints gives no remainder
+        		remain = ((num1+num2) % denom1) + "/" + denom1; //mod will find remainder, need the denom
+        		return whole + "_" + remain;//
+        	}
+        	
+        	//RETURN
+        	return (num1 + num2) + "/" + lcm;
         }
         
         //SUBTRACTION
-        public static String sub (int whole, int num, int denom) {
+        public static String sub (int num1, int denom1, int num2, int denom2) {
+        	//CALCULATION
+        	int gcf = gcf(denom1, denom2);
+        	int lcm = (denom1/gcf) * denom2;
+        	num1 = num1 * (lcm/denom1);
+        	num2 = num2 * (lcm/denom2);
         	
-        	return "";
+        	//IMPROP ANSWER TO MIXED NUM ANSWER
+        	String whole = "";
+        	String remain = "";
+        	int largestNum = 0;
+        	int smallerNum = 0;
+
+        	
+        	if (num1 > num2) {
+        		largestNum = num1;
+        		smallerNum = num2;
+        	}else {
+        		largestNum = num2;
+        		smallerNum = num2;
+        	}
+        	
+        	
+        	if ((largestNum - smallerNum) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
+        		if(num1 > num2) {
+        		whole = ((num1-num2)/denom1) + ""; //dividing by ints gives no remainder
+        		remain = ((num1-num2) % denom1) + "/" + denom1; //mod will find remainder, need the denom
+        		return whole + "_" + remain;//
+        	} else { 
+        		whole = ((num2-num1)/denom1) + ""; //dividing by ints gives no remainder
+        		remain = ((num2-num1) % denom1) + "/" + denom1; //mod will find remainder, need the denom
+        		return whole + "_" + remain;//
+        	}
+        	
+        	//RETURN 
+        	if(num1 > num2) {
+        		return (num1 - num2) + "/" + lcm;
+        	}else {
+        		return (num2 - num1) + "/" + lcm;
+        	}
         }
         //MULTIPLICATION
-        public static String mult (int whole, int num, int denom) {
-        	
-        	return "";
-        }
+        public static String mult (int num1, int denom1, int num2, int denom2) {
+        	int num = num1 * num2;
+        	int denom =	denom1 * denom2;
+        	return num + "/" + denom;
+        	}
         //DIVISION 
-        public static String divide (int whole, int num, int denom) {
-        	
-        	return "";
+        public static String divide (int num1, int denom1, int num2, int denom2) {
+        	int num = num1 * denom2;//if given 1/2 and 1/4 will do 1/2 *4/1
+        	int denom = denom1 * num1; //these will be the final num and denoms
+        	return num + "/" + denom;
         }
         
         //GCF   

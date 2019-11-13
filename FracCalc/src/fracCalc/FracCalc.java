@@ -153,9 +153,9 @@ public class FracCalc {
        
        if (operator.equals("+")) {
     	   
-    	   if(whole1Int != 0 && whole2Int != 0 && num1Int != 0 && num2Int != 0) { //checks to see if both terms are mixed numbers
-    		   
-    	   return add(num1Int, num2Int, denom1Int, denom2Int);
+    	   if(whole1Int != 0 && whole2Int != 0 && num1Int != 0 && num2Int != 0) { //checks to see if both terms are mixed numbers   
+    	   return (whole2Int + whole1Int) + add(num1Int, num2Int, denom1Int, denom2Int);
+    	   
     	   } else {
         	   return add(num1Int, num2Int, denom1Int, denom2Int);
     	   }
@@ -217,7 +217,7 @@ public class FracCalc {
         		
     		}else if (!whole.equals("0") && !remain.equals("0")) {// both do not equal zero than it is a mixed fraction
     			
-    			return whole + "_" + remain + "/" + lcm; //prints mixed num
+    			return whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
     			
     		}else { //default will assume it is only two fractions 
     			return (remain) + "/" + lcm;

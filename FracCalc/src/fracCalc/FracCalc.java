@@ -155,7 +155,13 @@ public class FracCalc {
        //TESTING FOR OPERATORS
        
        if (operator.equals("+")) {
+    	   
+    	   if(whole1Int != 0 && whole2Int != 0 && num1Int != 0 && num2Int != 0) { //checks to see if both terms are mixed numbers
+    		   
     	   return add(num1Int, num2Int, denom1Int, denom2Int);
+    	   } else {
+        	   return add(num1Int, num2Int, denom1Int, denom2Int);
+    	   }
     	   
        }else if (operator.equals("-")) {
     	   return sub(num1Int, denom1Int, num2Int, denom2Int); //already improp at this point so no need for whole
@@ -169,8 +175,6 @@ public class FracCalc {
        }
        
     }
-    
-
     
     
     // TODO: Fill in the space below with any helper methods that you think you will need 
@@ -186,23 +190,42 @@ public class FracCalc {
         public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
-        	int lcm = (denom1/gcf) * denom2; //lcm is now denom 
-        	num1 = num1 * (lcm/denom1);
+        	int lcm = (denom1/gcf) * denom2; //lcm is now denom of final fractions
+        	num1 = num1 * (lcm/denom1); //num1 + num2 = numerator for final fraction
         	num2 = num2 * (lcm/denom2);
         	
         	//RETURN IMPROP ANSWER TO MIXED NUM ANSWER
-        	String whole = "";
+        	String whole = ""; //whole number of the improper fraction created as a result of adding the two fractions
         	String remain = "";
+        	int sumOfNum = num1+num2;
         	
-        	if ((num1+num2) > lcm) { //if num of final frac is less than lcm, we need to find whole num and remainder fraction
-        		whole = ((num1+num2)/denom1) + ""; //dividing by ints gives no remainder
-        		remain = ((num1+num2) % denom1) + "/" + denom1; //mod will find remainder, need the denom
-        		return whole + "_" + remain;//
+        	if (Math.abs(sumOfNum) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
+        		whole = (sumOfNum/lcm) + ""; //dividing by ints gives no remainder
+        		remain = (sumOfNum % lcm) + ""; //mod will find remainder, need the denom (1/2)
         	}
         	
-        	//RETURN
-        	return (num1 + num2) + "/" + lcm;
-        }
+        	//RETURN ANSWER
+        	//three tests 
+        	//1/2 + 3/4
+        	//5/2 + 3/2
+        	//-7/2 + -5/2 
+        	//1_1/2 + 3_1/4 failed num1 = 2, num2 = 4, sum = 6, lcm = 4
+        	//5/2 + 1_1/2
+        	
+        	if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
+        		return (whole) + ""; //prints whole num
+        		
+    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
+        		return (remain) + "/" + lcm; //prints fraction
+        		
+    		}else if (!whole.equals("0") && !remain.equals("0")) {// both do not equal zero than it is a mixed fraction
+    			
+    			return whole + "_" + remain + "/" + lcm; //prints mixed num
+    			
+    		}else { //default will assume it is only two fractions 
+    			return (remain) + "/" + lcm;
+    		}
+     }
         
         //SUBTRACTION
         public static String sub (int num1, int denom1, int num2, int denom2) {
@@ -222,7 +245,13 @@ public class FracCalc {
         		if(num1 > num2) {
         		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
         		remain = (diffOfNum % denom1) + "/" + denom1; //mod will find remainder, need the denom
-        		return whole + "_" + remain;
+        		
+        		if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
+            		return whole; 
+        		}else {
+            		return whole + "_" + remain;
+
+        		}
         	} else { 
         		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
         		remain = Math.abs((diffOfNum % denom1)) + "/" + denom1; //mod will find remainder 

@@ -32,15 +32,12 @@ public class FracCalc {
     // The function should return the result of the fraction after it has been calculated
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input) { 
-    	//first level takes inputs
-        String operand1 = "";
-        String operand2 = "";
-        String operator = "";
+    	
         
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
-        operand1 = arrOfStr[0];
-        operator = arrOfStr[1];
-        operand2 = arrOfStr[2];
+        String operand1 = arrOfStr[0];
+        String operator = arrOfStr[1];
+        String operand2 = arrOfStr[2];
         
         //splits first level of inputs
         

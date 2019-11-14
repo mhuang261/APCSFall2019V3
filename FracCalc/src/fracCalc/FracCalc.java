@@ -74,22 +74,17 @@ public class FracCalc {
         	}
         }
      
-
         	//CHECKS FOR MIXED NUMBER LIKE 5_1/2
-        	if (splitFrac1Num.length > 1 ) { // all mixed numbers will pass through here
-        		
+        	if (splitFrac1Num.length > 1 ) { // all mixed numbers will pass through here		
             	whole1 = splitFrac1Num[0]; 
             	num1 = splitFrac1Num[1];
             	denom1 = splitFrac1[1];
-     	}
-        
-        	//PARSE FIRST FRACTION
+     	}       
         	
         	//NEED TO CONVERT BACK TO INT
             int num1Int = Integer.parseInt(num1);
             int denom1Int = Integer.parseInt(denom1);
             int whole1Int = Integer.parseInt(whole1);
-        
         
         //2ND FRACTION
                 	
@@ -97,7 +92,6 @@ public class FracCalc {
         String num2 = ""; //could be more than a single digit, may be 5_1
         String denom2 = "";// can either be 1 if whole number or something like 5 if fraction (1/5)
         String whole2 = "";
-        
         
         //FRACTION, INTEGER AND MIXED NUMBER TESTS
         String[] splitFrac2 = operand2.split("/"); //  if operand 2 is 21/2 then (21, 2)
@@ -172,9 +166,28 @@ public class FracCalc {
     		return improperNum; 
     	}
     	
+    	//CHECKS FOR OPERATOR FUNCTIONS
+    	public static String opChecks (String whole, String remain, int lcm, int sumOrDiff) {
+    		if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
+        		return (whole) + ""; //prints whole num
+        		
+    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
+        		return (remain) + "/" + lcm; //prints fraction
+        		
+    		}else if (!whole.equals("0") && !remain.equals("0") && sumOrDiff > lcm) {// both do not equal zero than it is a mixed fraction or a regular fraction
+    			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
+    			
+    		}else if (!whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
+    			return (sumOrDiff / lcm) + "";
+    			
+    			}else { //default will assume it is only two fractions 
+    			return (remain) + "/" + lcm;
+    		}
+    		
+    	}
+    	
     	//ADDITION
         public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
-        	
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2; //lcm is now denom of final fractions
@@ -191,41 +204,12 @@ public class FracCalc {
         		remain = (sumOfNum % lcm) + ""; //mod will find remainder, need the denom (1/2)
         	}
         	
-        	//three tests 
-        	//1/2 + 3/4 = 1_1/4
-        	//5/2 + 3/2 = 4
-        	//-7/2 + -5/2 = -6
-        	//1_1/2 + 3_1/4 = 4_3/4 
-        	//5/2 + 1_1/2 = 4
-        	
         	//RETURN ANSWER
-        	if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
-        		return (whole) + ""; //prints whole num
-        		
-    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
-        		return (remain) + "/" + lcm; //prints fraction
-        		
-    		}else if (!whole.equals("0") && !remain.equals("0") && sumOfNum > lcm) {// both do not equal zero than it is a mixed fraction or a regular fraction
-    			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
-    			
-    		}else if (!whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
-    			return (sumOfNum / lcm) + "";
-    			
-    			}else { //default will assume it is only two fractions 
-    			return (remain) + "/" + lcm;
-    		}
+        	return opChecks(whole, remain, lcm, sumOfNum);
      }
         
         //SUBTRACTION
         public static String sub (int num1, int denom1, int num2, int denom2) {
-        	
-        	//three tests 
-        	//1/2 - 3/4 = -1/4
-        	//5/2 - 3/2 = 1_0/2 or 1
-        	//-7/2 - -5/2 = -1_0/2 or -1 or -2/2
-        	//1_1/2 - 3_1/4 = -1_3/4 fails gets -3_1/2
-        	//5/2 - 1_1/2 = 1_0/2 or 1
-        	
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2;
@@ -245,33 +229,46 @@ public class FracCalc {
         	}
         	
         	//RETURN ANSWER
-        	if(remain.equals("0") && !whole.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
-        		return (whole) + "";
-    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
-        		return (remain) + "/" + lcm; //prints fraction
-        		
-    		}else if (!whole.equals("0") && !remain.equals("0") && Math.abs(diffOfNum) > lcm) {// both do not equal zero than it is a mixed fraction
-    			return whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE (_/2)???
-    			
-    		}else if (whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
-    			return (diffOfNum / lcm) + "";
-    			
-    			}else { //default will assume it is only two fractions 
-    			return (remain) + "/" + lcm;
-    		}      	
+        	return opChecks(whole, remain, lcm, diffOfNum);  	
        }
         
         //MULTIPLICATION
         public static String mult (int num1, int denom1, int num2, int denom2) {
-        	int num = num1 * num2;
-        	int denom =	denom1 * denom2;
-        	return num + "/" + denom;
+        	int gcf = gcf(denom1, denom2);
+        	int lcm = (denom1/gcf) * denom2;
+        	int prodOfNum = num1 * num2;
+        	int prodOfDenom =	denom1 * denom2;
+        	int tester = 0;
+        	
+        	
+        	//checks for negative
+        	if (prodOfNum > prodOfDenom) {// will be improper fraction and will need 
+        		//will run simplification code
+        		tester = denom1 / lcm;
+        		return prodOfNum + "/" + lcm;
+        	}else if (prodOfNum < prodOfDenom)// will be fraction 
+        		return prodOfNum + "/" + prodOfDenom;
+        	}else if () {
+        		
         	}
+        	
+        	//tests
+        	//-1/2 * - 1/4 = - 1/8, run code 
+        	//-1/2 * 1/4 = 1/8
+        	//1/2 * 1/2 = 1/4
+        	//1_1/2 * 2_1/4 = 27/8 or 3_3/8
+        	//5/3 * 5/2 = 10/4 or 2_1/2
+        	
+        	
+        	return "";
+        	}
+}
         //DIVISION 
         public static String divide (int num1, int denom1, int num2, int denom2) {
         	int num = num1 * denom2;//if given 1/2 and 1/4 will do 1/2 *4/1
         	int denom = denom1 * num1; //these will be the final num and denoms
         	return num + "/" + denom;
+        
         }
         
         //GCF   
@@ -300,8 +297,7 @@ public class FracCalc {
         			smaller = b;
         		}
     		}
-    		return greatestcommon;
-        
+    		return greatestcommon;       
         }
     
         //LCM (find gcf, x/gcf then multiply to y
@@ -313,6 +309,4 @@ public class FracCalc {
         	
         	return answer;
         }
-
-
 }

@@ -143,22 +143,14 @@ public class FracCalc {
         
      
         //MIXED NUMBER CONVERT TO IMPROPER TO ACCESS LCM EASIER
-       if (whole2Int != 0) { // if the whole number is not zero, then will call and change mixed number into improper fraction
-			num2Int = MixImp(whole2Int, num2Int, denom2Int);
-		}else if (whole1Int != 0) {
-			num1Int = MixImp(whole1Int, num1Int, denom2Int); 
-		}
+			num2Int = mixImp(whole2Int, num2Int, denom2Int);
+			num1Int = mixImp(whole1Int, num1Int, denom1Int); 
+		
        
        //TESTING FOR OPERATORS
        
        if (operator.equals("+")) {
-    	   
-    	   if(whole1Int != 0 && whole2Int != 0 && num1Int != 0 && num2Int != 0) { //checks to see if both terms are mixed numbers   
-    	   return (whole2Int + whole1Int) + add(num1Int, num2Int, denom1Int, denom2Int);
-    	   
-    	   } else {
-        	   return add(num1Int, num2Int, denom1Int, denom2Int);
-    	   }
+           return add(num1Int, num2Int, denom1Int, denom2Int);   
     	   
        }else if (operator.equals("-")) {
     	   return sub(num1Int, denom1Int, num2Int, denom2Int); //already improp at this point so no need for whole
@@ -168,33 +160,31 @@ public class FracCalc {
 
        }else {
     	   return divide(num1Int, denom1Int, num2Int, denom2Int);
-
        }
-       
     }
-    
     
     // TODO: Fill in the space below with any helper methods that you think you will need 
     //EXTRA METHODS GO HERE
     
     	//MIXED TO IMPROPER (5_1/2 --> 11/2)
-    	public static int MixImp (int whole, int num, int denom) {
+    	public static int mixImp (int whole, int num, int denom) {
     		int improperNum = whole*denom + num;
-    		return improperNum;
+    		return improperNum; 
     	}
     	
     	//ADDITION
         public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
+        	
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2; //lcm is now denom of final fractions
         	num1 = num1 * (lcm/denom1); //num1 + num2 = numerator for final fraction
-        	num2 = num2 * (lcm/denom2);
+        	num2 = num2 * (lcm/denom2); 
+        	int sumOfNum = num1+num2; //should be 19
         	
         	//RETURN IMPROP ANSWER TO MIXED NUM ANSWER
         	String whole = ""; //whole number of the improper fraction created as a result of adding the two fractions
         	String remain = "";
-        	int sumOfNum = num1+num2;
         	
         	if (Math.abs(sumOfNum) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
         		whole = (sumOfNum/lcm) + ""; //dividing by ints gives no remainder
@@ -203,11 +193,11 @@ public class FracCalc {
         	
         	//RETURN ANSWER
         	//three tests 
-        	//1/2 + 3/4
-        	//5/2 + 3/2
-        	//-7/2 + -5/2 
-        	//1_1/2 + 3_1/4 failed num1 = 2, num2 = 4, sum = 6, lcm = 4
-        	//5/2 + 1_1/2
+        	//1/2 + 3/4 = 1_1/4
+        	//5/2 + 3/2 = 4
+        	//-7/2 + -5/2 = -6
+        	//1_1/2 + 3_1/4 = 4_3/4 failed num1 = 3, num2 = 4, sum = 6, lcm = 4
+        	//5/2 + 1_1/2 = 4
         	
         	if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
         		return (whole) + ""; //prints whole num
@@ -217,7 +207,7 @@ public class FracCalc {
         		
     		}else if (!whole.equals("0") && !remain.equals("0")) {// both do not equal zero than it is a mixed fraction
     			
-    			return whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
+    			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
     			
     		}else { //default will assume it is only two fractions 
     			return (remain) + "/" + lcm;
@@ -262,9 +252,8 @@ public class FracCalc {
             	}else {
             		return diffOfNum + "/" + lcm;
             	}
-            	
-        	
         }
+        
         //MULTIPLICATION
         public static String mult (int num1, int denom1, int num2, int denom2) {
         	int num = num1 * num2;

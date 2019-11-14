@@ -191,68 +191,75 @@ public class FracCalc {
         		remain = (sumOfNum % lcm) + ""; //mod will find remainder, need the denom (1/2)
         	}
         	
-        	//RETURN ANSWER
         	//three tests 
         	//1/2 + 3/4 = 1_1/4
         	//5/2 + 3/2 = 4
         	//-7/2 + -5/2 = -6
-        	//1_1/2 + 3_1/4 = 4_3/4 failed num1 = 3, num2 = 4, sum = 6, lcm = 4
+        	//1_1/2 + 3_1/4 = 4_3/4 
         	//5/2 + 1_1/2 = 4
         	
+        	//RETURN ANSWER
         	if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
         		return (whole) + ""; //prints whole num
         		
     		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
         		return (remain) + "/" + lcm; //prints fraction
         		
-    		}else if (!whole.equals("0") && !remain.equals("0")) {// both do not equal zero than it is a mixed fraction
-    			
+    		}else if (!whole.equals("0") && !remain.equals("0") && sumOfNum > lcm) {// both do not equal zero than it is a mixed fraction or a regular fraction
     			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
     			
-    		}else { //default will assume it is only two fractions 
+    		}else if (!whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
+    			return (sumOfNum / lcm) + "";
+    			
+    			}else { //default will assume it is only two fractions 
     			return (remain) + "/" + lcm;
     		}
      }
         
         //SUBTRACTION
         public static String sub (int num1, int denom1, int num2, int denom2) {
+        	
+        	//three tests 
+        	//1/2 - 3/4 = -1/4
+        	//5/2 - 3/2 = 1_0/2 or 1
+        	//-7/2 - -5/2 = -1_0/2 or -1 or -2/2
+        	//1_1/2 - 3_1/4 = -1_3/4 fails gets -3_1/2
+        	//5/2 - 1_1/2 = 1_0/2 or 1
+        	
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2;
         	num1 = num1 * (lcm/denom1);
         	num2 = num2 * (lcm/denom2);
-        	
+          	int diffOfNum= num1 - num2;
+
         	//IMPROP ANSWER TO MIXED NUM ANSWER
         	String whole = "";
         	String remain = "";
-          	int diffOfNum= num1 - num2;
         	
-        	if ((num1) > lcm) { //tests for improper or not
-        		
-        		if(num1 > num2) {
-        		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
-        		remain = (diffOfNum % denom1) + "/" + denom1; //mod will find remainder, need the denom
-        		
-        		if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
-            		return whole; 
-        		}else {
-            		return whole + "_" + remain;
-
-        		}
-        	} else { 
-        		whole = (diffOfNum/denom1) + ""; //dividing by ints gives no remainder
-        		remain = Math.abs((diffOfNum % denom1)) + "/" + denom1; //mod will find remainder 
-        		return whole + "_" + remain;
-        		
+        	if (Math.abs(diffOfNum) > lcm) { //tests for improper or not
+        		whole = (diffOfNum/lcm) + ""; //dividing by ints gives no remainder
+        		remain = Math.abs(diffOfNum % lcm) + ""; //mod will find remainder, need the denom	
+        	}else {
+        		return (diffOfNum / lcm) + ""; // return if normal fraction
         	}
-        }
-        	//NORMAL CHECK
-        		if(num1 > num2) {
-            		return diffOfNum + "/" + lcm;
-            	}else {
-            		return diffOfNum + "/" + lcm;
-            	}
-        }
+        	
+        	//RETURN ANSWER
+        	if(remain.equals("0") && !whole.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
+        		return (whole) + "";
+    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
+        		return (remain) + "/" + lcm; //prints fraction
+        		
+    		}else if (!whole.equals("0") && !remain.equals("0") && Math.abs(diffOfNum) > lcm) {// both do not equal zero than it is a mixed fraction
+    			return whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE (_/2)???
+    			
+    		}else if (whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
+    			return (diffOfNum / lcm) + "";
+    			
+    			}else { //default will assume it is only two fractions 
+    			return (remain) + "/" + lcm;
+    		}      	
+       }
         
         //MULTIPLICATION
         public static String mult (int num1, int denom1, int num2, int denom2) {

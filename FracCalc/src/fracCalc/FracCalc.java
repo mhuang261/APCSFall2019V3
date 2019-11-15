@@ -131,7 +131,7 @@ public class FracCalc {
      	}
              
         //NEED TO CONVERT BACK TO INT
-        int whole2Int = Integer.parseInt(whole2);
+        int whole2Int = Integer.parseInt(whole2); 
         int num2Int = Integer.parseInt(num2);
         int denom2Int = Integer.parseInt(denom2);
         
@@ -139,7 +139,6 @@ public class FracCalc {
         //MIXED NUMBER CONVERT TO IMPROPER TO ACCESS LCM EASIER
 			num2Int = mixImp(whole2Int, num2Int, denom2Int);
 			num1Int = mixImp(whole1Int, num1Int, denom1Int); 
-		
        
        //TESTING FOR OPERATORS
        
@@ -162,8 +161,13 @@ public class FracCalc {
     
     	//MIXED TO IMPROPER (5_1/2 --> 11/2)
     	public static int mixImp (int whole, int num, int denom) {
-    		int improperNum = whole*denom + num;
-    		return improperNum; 
+    		int improperNum = 0;
+    		if (whole < 0) {
+    		    improperNum = whole*denom - num;
+    		}else {
+    		    improperNum = whole*denom + num;
+    		}
+       		return improperNum; 
     	}
     	
     	//CHECKS FOR OPERATOR FUNCTIONS
@@ -205,7 +209,8 @@ public class FracCalc {
         	}
         	
         	//RETURN ANSWER
-        	return opChecks(whole, remain, lcm, sumOfNum);
+        	return gcf + "";
+        			//opChecks(whole, remain, lcm, sumOfNum);
      }
         
         //SUBTRACTION
@@ -246,10 +251,8 @@ public class FracCalc {
         		//will run simplification code
         		tester = denom1 / lcm;
         		return prodOfNum + "/" + lcm;
-        	}else if (prodOfNum < prodOfDenom)// will be fraction 
+        	}else if (prodOfNum < prodOfDenom) {// will be fraction 
         		return prodOfNum + "/" + prodOfDenom;
-        	}else if () {
-        		
         	}
         	
         	//tests
@@ -261,13 +264,22 @@ public class FracCalc {
         	
         	
         	return "";
-        	}
+        	
 }
         //DIVISION 
         public static String divide (int num1, int denom1, int num2, int denom2) {
         	int num = num1 * denom2;//if given 1/2 and 1/4 will do 1/2 *4/1
         	int denom = denom1 * num1; //these will be the final num and denoms
-        	return num + "/" + denom;
+        	
+        	if (denom < 0) {
+        		num *= -1;
+        		denom *= -1;
+        		
+        		return num + "/" + denom;
+        	}else {
+            	return num + "/" + denom;
+
+        	}
         
         }
         

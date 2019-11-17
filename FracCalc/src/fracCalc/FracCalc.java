@@ -206,6 +206,8 @@ public class FracCalc {
         	if (Math.abs(sumOfNum) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
         		whole = (sumOfNum/lcm); //dividing by ints gives no remainder
         		remain = Math.abs(sumOfNum % lcm); //mod will find remainder, need the denom (1/2)
+        	}else {
+        		whole = sumOfNum / lcm;
         	}
         	
         	//RETURN ANSWER
@@ -241,7 +243,7 @@ public class FracCalc {
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2;
         	int prodOfNum = num1 * num2;
-        	int prodOfDenom =	denom1 * denom2;
+        	int prodOfDenom = denom1 * denom2;
         	int tester = 0;
         	
         	
@@ -261,27 +263,26 @@ public class FracCalc {
         	//1_1/2 * 2_1/4 = 27/8 or 3_3/8
         	//5/3 * 5/2 = 10/4 or 2_1/2
         	
-        	
-        	return "";
-        	
+    		return prodOfNum + "/" + lcm;
+
 }
         //DIVISION 
         public static String divide (int num1, int denom1, int num2, int denom2) {
+        	int gcf = gcf(denom1, denom2);
         	int num = num1 * denom2;//if given 1/2 and 1/4 will do 1/2 *4/1
-        	int denom = denom1 * num1; //these will be the final num and denoms
+        	int denom = denom1 * num2; //these will be the final num and denoms
         	
         	if (denom < 0) {
         		num *= -1;
         		denom *= -1;
-        		
         		return num + "/" + denom;
-        	}else {
+        		
+        	}else if (num == 0) {
+        		return 0 + "";
+        	}else
             	return num + "/" + denom;
-
         	}
-        
-        }
-        
+    
         //GCF   
         public static int gcf(int a, int b) {
     		int greatestcommon = 1;

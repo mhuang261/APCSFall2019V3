@@ -171,18 +171,18 @@ public class FracCalc {
     	}
     	
     	//CHECKS FOR OPERATOR FUNCTIONS
-    	public static String opChecks (String whole, String remain, int lcm, int sumOrDiff) {
-    		if(remain.equals("0")) { //if remainder = zero, do not print 1_0/2 print 1
+    	public static String opChecks (int whole, int remain, int lcm, int sumOrDiff) {
+    		if(remain == 0) { //if remainder = zero, do not print 1_0/2 print 1
         		return (whole) + ""; //prints whole num
         		
-    		}else if (whole.equals("0")) {//if whole = zero do not print 0_1/2 print 1/2 
+    		}else if (whole == 0) {//if whole = zero do not print 0_1/2 print 1/2 
         		return (remain) + "/" + lcm; //prints fraction
         		
-    		}else if (!whole.equals("0") && !remain.equals("0") && sumOrDiff > lcm) {// both do not equal zero than it is a mixed fraction or a regular fraction
+    		}else if ((whole != 0) && (remain != 0) && (remain < lcm)) {// will check for mixed fractions
     			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
     			
-    		}else if (!whole.equals("0") && !remain.equals("0")) {//if whole is zero and remainder is not, this is an addition of regular fractions like 1/2 + 1/2
-    			return (sumOrDiff / lcm) + "";
+    		}else if ((whole != 0) && (remain != 0) && (remain > lcm)) {//checks for improper fractions 
+    			return whole + (remain/lcm) + "_" + remain + "/" + lcm;
     			
     			}else { //default will assume it is only two fractions 
     			return (remain) + "/" + lcm;
@@ -200,17 +200,16 @@ public class FracCalc {
         	int sumOfNum = num1+num2; //should be 19
         	
         	//RETURN IMPROP ANSWER TO MIXED NUM ANSWER
-        	String whole = ""; //whole number of the improper fraction created as a result of adding the two fractions
-        	String remain = "";
+        	int whole = 0; //whole number of the improper fraction created as a result of adding the two fractions
+        	int remain = 0;
         	
         	if (Math.abs(sumOfNum) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
-        		whole = (sumOfNum/lcm) + ""; //dividing by ints gives no remainder
-        		remain = (sumOfNum % lcm) + ""; //mod will find remainder, need the denom (1/2)
+        		whole = (sumOfNum/lcm); //dividing by ints gives no remainder
+        		remain = Math.abs(sumOfNum % lcm); //mod will find remainder, need the denom (1/2)
         	}
         	
         	//RETURN ANSWER
-        	return gcf + "";
-        			//opChecks(whole, remain, lcm, sumOfNum);
+        	return opChecks(whole, remain, lcm, sumOfNum);
      }
         
         //SUBTRACTION
@@ -223,12 +222,12 @@ public class FracCalc {
           	int diffOfNum= num1 - num2;
 
         	//IMPROP ANSWER TO MIXED NUM ANSWER
-        	String whole = "";
-        	String remain = "";
+        	int whole = 0;
+        	int remain = 0;
         	
         	if (Math.abs(diffOfNum) > lcm) { //tests for improper or not
-        		whole = (diffOfNum/lcm) + ""; //dividing by ints gives no remainder
-        		remain = Math.abs(diffOfNum % lcm) + ""; //mod will find remainder, need the denom	
+        		whole = (diffOfNum/lcm); //dividing by ints gives no remainder
+        		remain = Math.abs(diffOfNum % lcm); //mod will find remainder, need the denom	
         	}else {
         		return (diffOfNum / lcm) + ""; // return if normal fraction
         	}
@@ -287,12 +286,16 @@ public class FracCalc {
         public static int gcf(int a, int b) {
     		int greatestcommon = 1;
     		int smaller = 0;
-
+    		
+    		if (a<=b) {//finds the smaller of a and b (want smaller)
+    			smaller = a;
+    		}else {
+    			smaller = b;
+    		}
     		if ( a<1 || b<1 ) {//if a or b is less than 1, execute code for negative gcf
     			
     			//-1 runs to -5, 5 times i = -5, a = -5, b = 10
     			for (int i = -1; i >= smaller; i--) {// i starts at -1, if -1 is greater than a and b then decrement until finds the larger of a and b
-    				
     				if (a % i == 0 && b % i == 0) { //if a and b modulo have no remainder, they are even and then return -i
     					greatestcommon = -i;
     				}
@@ -302,13 +305,11 @@ public class FracCalc {
     			if (a % i == 0 && b % i == 0) {
     					greatestcommon = i;
     			} 
-    			
-    			if (a<=b) {//finds the smaller of a and b (want smaller)
-        			smaller = a;
-        		}else {
-        			smaller = b;
-        		}
     		}
+    		if (a == b) {
+    			greatestcommon = a;
+    		}
+    		
     		return greatestcommon;       
         }
     

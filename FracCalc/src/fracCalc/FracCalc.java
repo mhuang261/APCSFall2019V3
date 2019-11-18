@@ -229,16 +229,29 @@ public class FracCalc {
         	int prodOfNum = num1 * num2;
         	int prodOfDenom = denom1 * denom2;
         	int tester = 0;
+        	int whole = prodOfNum / prodOfDenom;
+        	int remain = prodOfNum % prodOfDenom;
         	
-        	//checks for negative
-        	if (prodOfNum > prodOfDenom) {// will be improper fraction and will need 
-        		//will run simplification code
-        		tester = denom1 / lcm;
-        		return prodOfNum + "/" + lcm;
-        	}else if (prodOfNum < prodOfDenom) {// will be fraction 
+        	if (prodOfDenom < 0 || prodOfNum < 0) {//checks for negatives
+        		prodOfNum *= -1;
+        		prodOfDenom *= -1;
+        		
         		return prodOfNum + "/" + prodOfDenom;
-        	}       	
-    		return prodOfNum + "/" + lcm;
+
+        	}else if (prodOfNum == 0) {//checks for zero answers
+    		return 0 + "";
+    		
+        	}else if (remain == 0) {
+    		return whole + "";
+    		
+        	}else if (prodOfNum > prodOfDenom) {// will be improper fraction and will need 
+        		tester = gcf(remain, prodOfDenom);  // this is least greatest common factor
+        		remain /= tester;
+        		prodOfDenom /= tester;
+        		return whole + "_" + remain + "/" + tester;
+        		
+        	}else   
+        		return prodOfNum + "/" + prodOfDenom;
 }
         //DIVISION 
         public static String divide (int num1, int denom1, int num2, int denom2) {
@@ -248,7 +261,7 @@ public class FracCalc {
         	int remain = num % denom;
         	int simplify = 0;
         	
-        	if (denom < 0) {//checks for negatives
+        	if (denom < 0 || num < 0) {//checks for negatives
         		num *= -1;
         		denom *= -1;
         		
@@ -310,3 +323,5 @@ public class FracCalc {
         	return answer;
         }
 }
+
+

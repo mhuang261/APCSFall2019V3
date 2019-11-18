@@ -2,7 +2,6 @@
 //11/5/19 APCS 3rd
 //code produces a calculator that intakes two fractions of any form and calculates the result given an operator
 package fracCalc;
-
 import java.util.*;
 
 public class FracCalc {
@@ -22,7 +21,6 @@ public class FracCalc {
     	} 
      // TODO: Read the input from the user and call produceAnswer with an equation   	
     }
-    
     // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
     // This function takes a String 'input' and produces the result
     //
@@ -33,13 +31,10 @@ public class FracCalc {
     //      e.g. return ==> "1_1/4"
     public static String produceAnswer(String input) { 
     	
-        
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
         String operand2 = arrOfStr[2];
-        
-        //splits first level of inputs
         
         //1ST FRACTION
     	
@@ -48,14 +43,13 @@ public class FracCalc {
         String denom1 = "";// can either be 1 if whole number or something like 5 if fraction (1/5)
         String whole1 = "";
         
-        
         //FRACTION, INTEGER AND MIXED NUMBER TESTS
         String[] splitFrac1 = operand1.split("/"); //  if operand 2 is 21/2 then (21, 2)
         String[] splitFrac1Num = splitFrac1[0].split("_"); //splits index 0 at underscore like (5, 1) for 5_1 or (21) for 21,2
         
         //TESTS IF IT IS FRACTION OR INTEGER
         if (splitFrac1Num.length == 1) {//must be fraction or an integer (21/2 or 20)
-       
+        	
         	//CHECKS FOR FRACTION LIKE 21/2 OR 1/2
         	if (splitFrac1.length > 1) {
         		splitFrac1Num[0] = "0_" + splitFrac1Num[0]; // given (1/2) --> (1) ==> (0_1)
@@ -63,8 +57,7 @@ public class FracCalc {
         		whole1 = splitFrac1NumSingle[0]; 
         		num1 = splitFrac1NumSingle[1];
         		denom1 = splitFrac1[1];
-        	}
-        	
+        	}	
         	//CHECKS FOR WHOLE NUMBER LIKE 20 (INTEGER)
 
         	if (splitFrac1.length == 1) {
@@ -73,14 +66,13 @@ public class FracCalc {
         		denom1 = "1";
         	}
         }
-     
         	//CHECKS FOR MIXED NUMBER LIKE 5_1/2
         	if (splitFrac1Num.length > 1 ) { // all mixed numbers will pass through here		
             	whole1 = splitFrac1Num[0]; 
             	num1 = splitFrac1Num[1];
             	denom1 = splitFrac1[1];
      	}       
-        	
+
         	//NEED TO CONVERT BACK TO INT
             int num1Int = Integer.parseInt(num1);
             int denom1Int = Integer.parseInt(denom1);
@@ -100,9 +92,6 @@ public class FracCalc {
         //TESTS IF IT IS FRACTION OR INTEGER
         if (splitFrac2Num.length == 1) {//must be fraction or an integer (21/2 or 20)
         	
-        	//String[] splitFrac2NumWholeTest = splitFrac2Num[0].split("/"); // difference between frac and whole num (1/2 & 5) is / so we split.
-        	//splitFrac2NumWholeTest = (21)
-        	
         	//CHECKS FOR FRACTION LIKE 21/2 OR 1/2
         	if (splitFrac2.length > 1) {
         		splitFrac2Num[0] = "0_" + splitFrac2Num[0]; // given (1/2) --> (1) ==> (0_1)
@@ -113,22 +102,19 @@ public class FracCalc {
         	}
         	
         	//CHECKS FOR WHOLE NUMBER LIKE 20 (INTEGER)
-
         	if (splitFrac2.length == 1) {
         		whole2 = splitFrac2[0];
         		num2 = "0";
         		denom2 = "1";
         	}
         }
-     
-
         	//CHECKS FOR MIXED NUMBER LIKE 5_1/2
         	if (splitFrac2Num.length > 1 ) { // all mixed numbers will pass through here
         		
             	whole2 = splitFrac2Num[0]; 
             	num2 = splitFrac2Num[1];
             	denom2 = splitFrac2[1];
-     	}
+            	}
              
         //NEED TO CONVERT BACK TO INT
         int whole2Int = Integer.parseInt(whole2); 
@@ -186,8 +172,7 @@ public class FracCalc {
     			
     			}else { //default will assume it is only two fractions 
     			return (remain) + "/" + lcm;
-    		}
-    		
+    		}   		
     	}
     	
     	//ADDITION
@@ -208,8 +193,7 @@ public class FracCalc {
         		remain = Math.abs(sumOfNum % lcm); //mod will find remainder, need the denom (1/2)
         	}else {
         		whole = sumOfNum / lcm;
-        	}
-        	
+        	}        	
         	//RETURN ANSWER
         	return opChecks(whole, remain, lcm, sumOfNum);
      }
@@ -246,7 +230,6 @@ public class FracCalc {
         	int prodOfDenom = denom1 * denom2;
         	int tester = 0;
         	
-        	
         	//checks for negative
         	if (prodOfNum > prodOfDenom) {// will be improper fraction and will need 
         		//will run simplification code
@@ -254,35 +237,39 @@ public class FracCalc {
         		return prodOfNum + "/" + lcm;
         	}else if (prodOfNum < prodOfDenom) {// will be fraction 
         		return prodOfNum + "/" + prodOfDenom;
-        	}
-        	
-        	//tests
-        	//-1/2 * - 1/4 = - 1/8, run code 
-        	//-1/2 * 1/4 = 1/8
-        	//1/2 * 1/2 = 1/4
-        	//1_1/2 * 2_1/4 = 27/8 or 3_3/8
-        	//5/3 * 5/2 = 10/4 or 2_1/2
-        	
+        	}       	
     		return prodOfNum + "/" + lcm;
-
 }
         //DIVISION 
         public static String divide (int num1, int denom1, int num2, int denom2) {
-        	int gcf = gcf(denom1, denom2);
         	int num = num1 * denom2;//if given 1/2 and 1/4 will do 1/2 *4/1
         	int denom = denom1 * num2; //these will be the final num and denoms
+        	int whole = num / denom;
+        	int remain = num % denom;
+        	int simplify = 0;
         	
-        	if (denom < 0) {
+        	if (denom < 0) {//checks for negatives
         		num *= -1;
         		denom *= -1;
+        		
         		return num + "/" + denom;
         		
-        	}else if (num == 0) {
+        	}else if (num == 0) {//checks for zero answers
         		return 0 + "";
-        	}else
+        		
+        	}else if (remain == 0) {
+        		return whole + "";
+
+        	}else if (num > denom) {//need to simplify fraction like 3_4/6
+        		simplify = gcf(remain, denom);  // this is least greatest common factor
+        		remain /= simplify;
+        		denom /= simplify;
+        		return whole + "_" + remain + "/" + denom;
+        		
+        }else
             	return num + "/" + denom;
         	}
-    
+        
         //GCF   
         public static int gcf(int a, int b) {
     		int greatestcommon = 1;
@@ -302,15 +289,14 @@ public class FracCalc {
     				}
     			}
     		}
-    		for (int i = 1; i >= smaller; i++) {
+    		for (int i = 1; i <= smaller; i++) {
     			if (a % i == 0 && b % i == 0) {
     					greatestcommon = i;
     			} 
     		}
     		if (a == b) {
     			greatestcommon = a;
-    		}
-    		
+    		}  		
     		return greatestcommon;       
         }
     

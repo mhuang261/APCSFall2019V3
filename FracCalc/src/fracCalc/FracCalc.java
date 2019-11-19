@@ -163,20 +163,17 @@ public class FracCalc {
     		}else if (whole == 0 && sumOrDiff > lcm) {//if whole = zero do not print 0_1/2 print 1/2 
         		return (remain) + "/" + lcm; //prints fraction
         		
-    		}else if ((whole != 0) && (remain != 0) && (remain < lcm)) {// will check for mixed fractions
+    		}else if ((whole != 0) && (remain != 0)) {// will check for mixed fractions
     			return  whole + "_" + remain + "/" + lcm; //prints mixed num LOOK HERE
     			
-    		}else if ((whole != 0) && (remain != 0) && (remain > lcm)) {//checks for improper fractions 
-    			return whole + (remain/lcm) + "_" + remain + "/" + lcm;
-    			
-    			}else if (sumOrDiff < lcm && sumOrDiff != 0) {// need to simplify 
+    		}else if (sumOrDiff < lcm && sumOrDiff != 0) {// need to simplify 
     				tester = gcf(sumOrDiff, lcm);
     				sumOrDiff /= tester;
     				lcm /= tester;
 
     				return sumOrDiff + "/" + lcm; 
     				
-    			}else if (sumOrDiff == 0) {//default will assume it is only two fractions 
+    		}else if (sumOrDiff == 0) {//default will assume it is only two fractions 
     				return sumOrDiff + "";
     				
     			}
@@ -256,7 +253,10 @@ public class FracCalc {
         	int denom = denom1 * num2; //these will be the final num and denoms
         	int whole = num / denom;
         	int remain = num % denom;
-        	int simplify = 0;
+        	int tester = gcf(remain, denom);
+        	
+        	remain /= tester;
+    		denom /= tester;
         	        	
         	if (num < 0 && whole == 0) {//checks for negative fraction
         		num *= -1;
@@ -264,9 +264,6 @@ public class FracCalc {
         		return num + "/" + denom;   
         		
         	}else if (num < 0 && denom < 0 && Math.abs(denom) != 1) {//checks for negative improp answer
-        		simplify = gcf(remain, denom);  
-        		remain /= simplify;
-        		denom /= simplify;
         		return whole + "_" + Math.abs(remain) + "/" + Math.abs(denom);
         		
         	}else if (num < 0 && denom < 0 && Math.abs(denom) == 1) {
@@ -284,15 +281,9 @@ public class FracCalc {
         		return whole + "";
 
         	}else if (Math.abs(num) > denom && whole != 0) {//checks for improper answer
-        		simplify = gcf(remain, denom);
-        		remain /= simplify;
-        		denom /= simplify;
         		return whole + "_" + Math.abs(remain) + "/" + Math.abs(denom);
         		
         	}else if (Math.abs(num) > denom && whole == 0) {//checks for improper answer
-        		simplify = gcf(remain, denom);
-        		remain /= simplify;
-        		denom /= simplify;
         		return remain * -1 + "/" + Math.abs(denom);
         	}
             	return num + "/" + denom;
@@ -327,7 +318,7 @@ public class FracCalc {
     		}  		
     		return greatestcommon;       
         }
-    
+
         //LCM (find gcf, x/gcf then multiply to y
         public static int lcm (int denom1, int denom2) {
         	int answer = 0;

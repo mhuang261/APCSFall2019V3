@@ -128,12 +128,9 @@ public class FracCalc {
        
        //TESTING FOR OPERATORS
        
-       if (operator.equals("+")) {
-           return add(num1Int, num2Int, denom1Int, denom2Int);   
+       if (operator.equals("+") || operator.equals("-")) {
+           return addSub(num1Int, num2Int, denom1Int, denom2Int, operator);   
     	   
-       }else if (operator.equals("-")) {
-    	   return sub(num1Int, denom1Int, num2Int, denom2Int); //already improp at this point so no need for whole
-
        }else if (operator.equals("*")) {
     	   return mult(num1Int, denom1Int, num2Int, denom2Int);
 
@@ -187,53 +184,37 @@ public class FracCalc {
     		}   		
     	
     	//ADDITION
-        public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
+        public static String addSub (int num1, int num2, int denom1, int denom2, String operator) { //at this step all inputs will be ints
         	//CALCULATION
         	int gcf = gcf(denom1, denom2);
         	int lcm = (denom1/gcf) * denom2; //lcm is now denom of final fractions
         	num1 = num1 * (lcm/denom1); //num1 + num2 = numerator for final fraction
         	num2 = num2 * (lcm/denom2); 
-        	int sumOfNum = num1+num2; //should be 19        	
+        	int sumOrDiff = 0;
+        	
+        	if (operator.equals("+")) {
+        		sumOrDiff = num1+num2; 	
+        	}else if (operator.equals("-")) {
+        		sumOrDiff = num1 - num2;
+        	}
         	
         	//RETURN IMPROP ANSWER TO MIXED NUM ANSWER
         	int whole = 0; //whole number of the improper fraction created as a result of adding the two fractions
         	int remain = 0;
         	
-        	if (Math.abs(sumOfNum) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
-        		whole = (sumOfNum/lcm); //dividing by ints gives no remainder
-        		remain = Math.abs(sumOfNum % lcm); //mod will find remainder, need the denom (1/2)
+        	if (Math.abs(sumOrDiff) > lcm) { //if num of final frac is greater than lcm, it will be a improper fraction we need to find whole num and remainder of the fraction
+        		whole = (sumOrDiff/lcm); //dividing by ints gives no remainder
+        		remain = Math.abs(sumOrDiff % lcm); //mod will find remainder, need the denom (1/2)
         	}else {
-        		whole = sumOfNum / lcm;
+        		whole = sumOrDiff / lcm;
         	}        
         	int tester = gcf(remain, lcm);
         	remain /= tester;
     		lcm /= tester;
     		
         	//RETURN ANSWER
-        	return opChecks(whole, remain, lcm, sumOfNum);
+        	return opChecks(whole, remain, lcm, sumOrDiff);
      }
-        
-        //SUBTRACTION
-        public static String sub (int num1, int denom1, int num2, int denom2) {
-        	//CALCULATION
-        	int gcf = gcf(denom1, denom2);
-        	int lcm = (denom1/gcf) * denom2;
-        	num1 = num1 * (lcm/denom1);
-        	num2 = num2 * (lcm/denom2);
-          	int diffOfNum= num1 - num2;
-
-        	//IMPROP ANSWER TO MIXED NUM ANSWER
-        	int whole = 0;
-        	int remain = 0;
-        	
-        	if (Math.abs(diffOfNum) > lcm) { //tests for improper or not
-        		whole = (diffOfNum/lcm); //dividing by ints gives no remainder
-        		remain = Math.abs(diffOfNum % lcm); //mod will find remainder, need the denom	
-        	}
-        	
-        	//RETURN ANSWER
-        	return opChecks(whole, remain, lcm, diffOfNum);  	
-       }
         
         //MULTIPLICATION
         public static String mult (int num1, int denom1, int num2, int denom2) {

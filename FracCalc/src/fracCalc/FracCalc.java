@@ -109,8 +109,7 @@ public class FracCalc {
         	}
         }
         	//CHECKS FOR MIXED NUMBER LIKE 5_1/2
-        	if (splitFrac2Num.length > 1 ) { // all mixed numbers will pass through here
-        		
+        	if (splitFrac2Num.length > 1 ) { // all mixed numbers will pass through here	
             	whole2 = splitFrac2Num[0]; 
             	num2 = splitFrac2Num[1];
             	denom2 = splitFrac2[1];
@@ -119,8 +118,7 @@ public class FracCalc {
         //NEED TO CONVERT BACK TO INT
         int whole2Int = Integer.parseInt(whole2); 
         int num2Int = Integer.parseInt(num2);
-        int denom2Int = Integer.parseInt(denom2);
-        
+        int denom2Int = Integer.parseInt(denom2); 
      
         //MIXED NUMBER CONVERT TO IMPROPER TO ACCESS LCM EASIER
 			num2Int = mixImp(whole2Int, num2Int, denom2Int);
@@ -137,9 +135,7 @@ public class FracCalc {
        }else {
     	   return divide(num1Int, denom1Int, num2Int, denom2Int);
        }
-    }
-    
-    // TODO: Fill in the space below with any helper methods that you think you will need 
+    }  
     //EXTRA METHODS GO HERE
     
     	//MIXED TO IMPROPER (5_1/2 --> 11/2)

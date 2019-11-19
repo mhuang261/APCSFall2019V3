@@ -131,7 +131,7 @@ public class FracCalcTestFinal
     
     
     
-    @Test public void testDivisionWithNegatives1() {    assertEquals("1_5/8", FracCalc.produceAnswer("-13 / -8"));}
+    @Test public void testDivisionWithNegatives1() {assertEquals("1_5/8", FracCalc.produceAnswer("-13 / -8"));}
     @Test public void testDivisionWithNegatives2() {assertEquals("-2803", FracCalc.produceAnswer("-2803 / 1"));}
     @Test public void testDivisionWithNegatives3() {assertEquals("-12457", FracCalc.produceAnswer("12457 / -1"));}
     @Test public void testDivisionWithNegatives4() {assertEquals("45236", FracCalc.produceAnswer("-45236 / -1"));}

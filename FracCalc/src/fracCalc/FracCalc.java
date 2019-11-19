@@ -172,17 +172,19 @@ public class FracCalc {
     		}else if ((whole != 0) && (remain != 0) && (remain > lcm)) {//checks for improper fractions 
     			return whole + (remain/lcm) + "_" + remain + "/" + lcm;
     			
-    			}else if (sumOrDiff < lcm) {// need to simplify 
+    			}else if (sumOrDiff < lcm && sumOrDiff != 0) {// need to simplify 
     				tester = gcf(sumOrDiff, lcm);
     				sumOrDiff /= tester;
     				lcm /= tester;
 
     				return sumOrDiff + "/" + lcm; 
     				
-    			}else { //default will assume it is only two fractions 
+    			}else if (sumOrDiff == 0) {//default will assume it is only two fractions 
+    				return sumOrDiff + "";
+    				
+    			}
     			return (remain) + "/" + lcm;
     		}   		
-    	}
     	
     	//ADDITION
         public static String add (int num1, int num2, int denom1, int denom2) { //at this step all inputs will be ints
@@ -227,8 +229,6 @@ public class FracCalc {
         	if (Math.abs(diffOfNum) > lcm) { //tests for improper or not
         		whole = (diffOfNum/lcm); //dividing by ints gives no remainder
         		remain = Math.abs(diffOfNum % lcm); //mod will find remainder, need the denom	
-        	}else {
-        		return (diffOfNum / lcm) + ""; // return if normal fraction
         	}
         	
         	//RETURN ANSWER
@@ -245,9 +245,12 @@ public class FracCalc {
         	int whole = prodOfNum / prodOfDenom;
         	int remain = prodOfNum % prodOfDenom;
         	
-        	if (prodOfDenom < 0 || prodOfNum < 0) {//checks for negatives
+        	if (prodOfNum < 0 && remain != 0) {//checks for negatives
         		prodOfNum *= -1;
         		prodOfDenom *= -1;
+        		tester = gcf(remain, lcm);
+        		remain /= tester;
+        		lcm /= tester;
         		
         		return prodOfNum / prodOfDenom + "_" + Math.abs(remain) + "/" + lcm;
 
@@ -299,16 +302,21 @@ public class FracCalc {
         	}else if (remain == 0) {
         		return whole + "";
 
-        	}else if (Math.abs(num) > denom) {//checks for improper answer
-        		simplify = gcf(remain, denom);  // this is least greatest common factor
+        	}else if (Math.abs(num) > denom && whole != 0) {//checks for improper answer
+        		simplify = gcf(remain, denom);
         		remain /= simplify;
         		denom /= simplify;
         		return whole + "_" + Math.abs(remain) + "/" + Math.abs(denom);
         		
-        	}else 
+        	}else if (Math.abs(num) > denom && whole == 0) {//checks for improper answer
+        		simplify = gcf(remain, denom);
+        		remain /= simplify;
+        		denom /= simplify;
+        		return remain * -1 + "/" + Math.abs(denom);
+        	}
             	return num + "/" + denom;
         	}
-        
+
         //GCF   
         public static int gcf(int a, int b) {
     		int greatestcommon = 1;

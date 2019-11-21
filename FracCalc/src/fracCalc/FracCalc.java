@@ -19,19 +19,16 @@ public class FracCalc {
     		System.out.println("continue? (quit to quit, yes to continue)");
 		    quit = console.nextLine();	
     	} 
-     // TODO: Read the input from the user and call produceAnswer with an equation   	
-    }
-    // ** IMPORTANT ** DO NOT DELETE THIS FUNCTION.  This function will be used to test your code
-    // This function takes a String 'input' and produces the result
-    //
-    // input is a fraction string that needs to be evaluated.  For your program, this will be the user input.
-    //      e.g. input ==> "1/2 + 3/4"
-    //        
-    // The function should return the result of the fraction after it has been calculated
-    //      e.g. return ==> "1_1/4"
+   	} 
+
     public static String produceAnswer(String input) { 
     	
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
+
+        if (arrOfStr.length != 3 || !(arrOfStr[1]).equals("+") || !(arrOfStr[1]).equals("-") || !(arrOfStr[1]).equals("/") || !(arrOfStr[1]).equals("+")) {
+        	return "ERROR: Operator Incorrect or More Than Two Operations Detected.";
+        }
+        
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
         String operand2 = arrOfStr[2];
@@ -71,13 +68,16 @@ public class FracCalc {
             	whole1 = splitFrac1Num[0]; 
             	num1 = splitFrac1Num[1];
             	denom1 = splitFrac1[1];
-     	}       
+     	}
+        	if (denom1.equals("0")) {
+        		return "Cannot divide by zero.";
+        	}
 
         	//NEED TO CONVERT BACK TO INT
             int num1Int = Integer.parseInt(num1);
             int denom1Int = Integer.parseInt(denom1);
             int whole1Int = Integer.parseInt(whole1);
-        
+                    
         //2ND FRACTION
                 	
         //describing 2nd fraction        
@@ -114,7 +114,11 @@ public class FracCalc {
             	num2 = splitFrac2Num[1];
             	denom2 = splitFrac2[1];
             	}
-             
+        	
+        	if (denom1.equals("0")) {
+        		return "ERROR: Cannot divide by zero.";
+        	}
+        	
         //NEED TO CONVERT BACK TO INT
         int whole2Int = Integer.parseInt(whole2); 
         int num2Int = Integer.parseInt(num2);

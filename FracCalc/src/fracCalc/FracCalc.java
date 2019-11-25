@@ -25,9 +25,9 @@ public class FracCalc {
     	
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
 
-        if (arrOfStr.length != 3 || !(arrOfStr[1]).equals("+") || !(arrOfStr[1]).equals("-") || !(arrOfStr[1]).equals("/") || !(arrOfStr[1]).equals("+")) {
-        	return "ERROR: Operator Incorrect or More Than Two Operations Detected.";
-        }
+       // if (arrOfStr.length != 3 || !(arrOfStr[1]).equals("+") || !(arrOfStr[1]).equals("-") || !(arrOfStr[1]).equals("/") || !(arrOfStr[1]).equals("+")) {
+       // 	return "ERROR: Operator Incorrect or More Than Two Operations Detected.";
+       // }
         
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
@@ -115,7 +115,7 @@ public class FracCalc {
             	denom2 = splitFrac2[1];
             	}
         	
-        	if (denom1.equals("0")) {
+        	if (denom1.equals("0") || denom2.equals("0")) {
         		return "ERROR: Cannot divide by zero.";
         	}
         	

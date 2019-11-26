@@ -1,3 +1,5 @@
+//Michael Huang APCS 3rd 11/25/19 
+//multiple arraylist practice exercises and their solutions
 import java.util.ArrayList;
 
 public class ArrayListPracticeLab 
@@ -35,7 +37,7 @@ public class ArrayListPracticeLab
 	public static int maxLength(ArrayList<String> input) {
 		int result = 0;
 		for (int i = 0; i < input.size(); i++) {
-			input.get(i).length() = length;
+			result = input.get(i).length();
 			
 		}
 		if(input.size() == 0) {
@@ -43,10 +45,6 @@ public class ArrayListPracticeLab
 		}
 		return result;
 	}
-	
-	
-	
-	
 	/*
 	 * swapPairs
 	 * 
@@ -64,11 +62,24 @@ public class ArrayListPracticeLab
 	 *  For example, if the input list is: {"to", "be", "or", "not", "to", "be", "hamlet"} 
 	 *  The returned list should contain {"be", "to", "not", "or", "be", "to", "hamlet"}
 	 */
-	
-	
-	
-	
-	
+	public static ArrayList<String> swapPairs(ArrayList<String> input) {
+		String temp = "";
+		
+		if (input.size() % 2 == 0) {
+			for (int i = 0; i < input.size(); i+=2) {
+				temp = input.get(i);
+				input.set(i, input.get(i+1));
+				input.set(i+1, temp);
+				}
+		}else if (input.size() % 2 != 0) {
+			for (int i = 0; i < input.size()-1; i+=2) {
+				temp = input.get(i);
+				input.set(i, input.get(i+1));
+				input.set(i+1, temp);
+				}
+		}
+		return input;
+	}
 	/*
 	 * removeEvenLength
 	 * 
@@ -78,11 +89,16 @@ public class ArrayListPracticeLab
 	 * any Strings of even length.
 	 * removeEvenLength should not change the input ArrayList.
 	 */
-	
-	
-	
-	
-	
+	public static ArrayList<String> removeEvenLength(ArrayList<String> input) {
+		
+		for (int i = 0; i < input.size(); i++) {
+			if (input.get(i).length() % 2 == 0) {
+				input.remove(i);
+				i--;
+			}
+		}
+		return input;
+	}
 	/*
 	 * doubleList
 	 * 
@@ -93,7 +109,9 @@ public class ArrayListPracticeLab
 	 * is called, it should contain the values {"how", "how", "are", "are", "you?", "you?"} 
 	 * after the method finishes executing.
 	 */
-	
+	public static void doubleList(ArrayList<String> input) {
+		
+	}
 	
 	
 	
@@ -115,10 +133,10 @@ public class ArrayListPracticeLab
 		String[] test_max_1 = {"to", "be", "or", "not", "to", "be", "hamlet"};  
 		String[] test_max_2 = {"Only one really long string"};
 		String[] test_max_3 = {};		
-		System.out.println((maxLength( convertArrayToList(test_max_1))));
-		
-		
-		
+		System.out.println((maxLength(convertArrayToList(test_max_1))));
+		System.out.println((maxLength(convertArrayToList(test_max_2))));
+		System.out.println((maxLength(convertArrayToList(test_max_3))));
+
 		
 		// To test your swapPairs method, convert the following to ArrayLists of Strings and 
 		// pass them into your swapPairs method.  
@@ -131,10 +149,12 @@ public class ArrayListPracticeLab
 		String[] test_swap_2 = {"I", "love", "programming!"};
 		String[] test_swap_3 = {"don't move me"};
 		String[] test_swap_4 = {};
+		System.out.println(swapPairs(convertArrayToList(test_swap_1)));
+		System.out.println(swapPairs(convertArrayToList(test_swap_2)));
+		System.out.println(swapPairs(convertArrayToList(test_swap_3)));
+		System.out.println(swapPairs(convertArrayToList(test_swap_4)));
 
 		
-		
-
 		// To test your removeEvenLength method, convert the following to ArrayLists of Strings and 
 		// pass them into your removeEvenLength method.  
 		// Expected output:  
@@ -144,9 +164,9 @@ public class ArrayListPracticeLab
 		String[] test_rem_1 = {"This", "is", "a", "test"};
 		String[] test_rem_2 = {"Did", "you", "solve", "it", "or", "what?"};
 		String[] test_rem_3 = {};
-				
-		
-		
+		System.out.println(removeEvenLength(convertArrayToList(test_rem_1)));
+		System.out.println(removeEvenLength(convertArrayToList(test_rem_2)));
+		System.out.println(removeEvenLength(convertArrayToList(test_rem_3)));
 		
 		// To test your doubleList method, convert the following to ArrayLists of Strings and 
 		// pass them into your doubleList method.  
@@ -157,7 +177,10 @@ public class ArrayListPracticeLab
 		String[] test_doub_1 = {"how", "are", "you?"};
 		String[] test_doub_2 = {"One string only"};		
 		String[] test_doub_3 = {};		
-		
+		System.out.println(removeEvenLength(convertArrayToList(test_doub_1)));
+		System.out.println(removeEvenLength(convertArrayToList(test_doub_2)));
+		System.out.println(removeEvenLength(convertArrayToList(test_doub_3)));
+
 	}
 		
 		

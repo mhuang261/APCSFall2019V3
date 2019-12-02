@@ -25,9 +25,11 @@ public class FracCalc {
     	
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
 
-       // if (arrOfStr.length != 3 || !(arrOfStr[1]).equals("+") || !(arrOfStr[1]).equals("-") || !(arrOfStr[1]).equals("/") || !(arrOfStr[1]).equals("+")) {
-       // 	return "ERROR: Operator Incorrect or More Than Two Operations Detected.";
-       // }
+    	if (!(arrOfStr[1]).equals("+") && !(arrOfStr[1]).equals("-") && !(arrOfStr[1]).equals("/") && !(arrOfStr[1]).equals("*")){
+    		return "ERROR: Incorrect Operator Detected.";
+        }else if (arrOfStr.length != 3 ) {
+	       	return "ERROR: More Than Two Operations Detected.";
+	        }
         
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
@@ -126,8 +128,8 @@ public class FracCalc {
      
         //MIXED NUMBER CONVERT TO IMPROPER TO ACCESS LCM EASIER
 			num2Int = mixImp(whole2Int, num2Int, denom2Int);
-			num1Int = mixImp(whole1Int, num1Int, denom1Int); 
-       
+			num1Int = mixImp(whole1Int, num1Int, denom1Int);
+			
        //TESTING FOR OPERATORS
        
        if (operator.equals("+") || operator.equals("-")) {
@@ -329,5 +331,3 @@ public class FracCalc {
         	return answer;
         }
 }
-
-

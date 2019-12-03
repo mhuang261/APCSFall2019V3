@@ -26,10 +26,14 @@ public class FracCalc {
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
 
     	if (!(arrOfStr[1]).equals("+") && !(arrOfStr[1]).equals("-") && !(arrOfStr[1]).equals("/") && !(arrOfStr[1]).equals("*")){
-    		return "ERROR: Incorrect Operator Detected.";
+    		return "ERROR: Invalid Format Detected.";
         }else if (arrOfStr.length != 3 ) {
 	       	return "ERROR: More Than Two Operations Detected.";
-	        }
+	    }else if (Integer.parseInt(arrOfStr[2]) == 0 && arrOfStr[1].equals("/")) {
+	        return "ERROR: Cannot Divide By Zero.";
+	    }else if ((arrOfStr[2].charAt(0)).isDigit('0')) {
+	    	
+	    }
         
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
@@ -177,8 +181,7 @@ public class FracCalc {
     				
     		}else if (sumOrDiff == 0) {//default will assume it is only two fractions 
     				return sumOrDiff + "";
-    				
-    			}
+    		}
     			return (remain) + "/" + lcm;
     		}   		
     	

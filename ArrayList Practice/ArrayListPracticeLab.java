@@ -89,8 +89,7 @@ public class ArrayListPracticeLab
 	 * any Strings of even length.
 	 * removeEvenLength should not change the input ArrayList.
 	 */
-	public static ArrayList<String> removeEvenLength(ArrayList<String> input) {
-		
+	public static ArrayList<String> removeEvenLength(ArrayList<String> input) {	
 		for (int i = 0; i < input.size(); i++) {
 			if (input.get(i).length() % 2 == 0) {
 				input.remove(i);
@@ -109,12 +108,12 @@ public class ArrayListPracticeLab
 	 * is called, it should contain the values {"how", "how", "are", "are", "you?", "you?"} 
 	 * after the method finishes executing.
 	 */
-	public static void doubleList(ArrayList<String> input) {
-		
+	public static ArrayList<String> doubleList(ArrayList<String> input) {
+		for (int i = 0; i < input.size(); i+=2) {
+			input.add(i+1, input.get(i));
+		}
+		return input;
 	}
-	
-	
-	
 	
 	public static void main(String[] args) 
 	{
@@ -177,9 +176,9 @@ public class ArrayListPracticeLab
 		String[] test_doub_1 = {"how", "are", "you?"};
 		String[] test_doub_2 = {"One string only"};		
 		String[] test_doub_3 = {};		
-		System.out.println(removeEvenLength(convertArrayToList(test_doub_1)));
-		System.out.println(removeEvenLength(convertArrayToList(test_doub_2)));
-		System.out.println(removeEvenLength(convertArrayToList(test_doub_3)));
+		System.out.println(doubleList(convertArrayToList(test_doub_1)));
+		System.out.println(doubleList(convertArrayToList(test_doub_2)));
+		System.out.println(doubleList(convertArrayToList(test_doub_3)));
 
 	}
 		

@@ -24,6 +24,15 @@ public class FracCalc {
     public static String produceAnswer(String input) { 
     	
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2
+        
+        String[] errHand = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    	for (int i = 0; i < errHand.length; i++) {
+    		for (int j = 0; j < arrOfStr.length; j++) {
+    			if (arrOfStr[j] != errHand[i]) {
+    				return "ERROR: Invalid Format Detected.";
+    			}
+    		}
+    	}    	   
 
     	if (!(arrOfStr[1]).equals("+") && !(arrOfStr[1]).equals("-") && !(arrOfStr[1]).equals("/") && !(arrOfStr[1]).equals("*")){
     		return "ERROR: Invalid Format Detected.";
@@ -31,8 +40,6 @@ public class FracCalc {
 	       	return "ERROR: More Than Two Operations Detected.";
 	    }else if (Integer.parseInt(arrOfStr[2]) == 0 && arrOfStr[1].equals("/")) {
 	        return "ERROR: Cannot Divide By Zero.";
-	    }else if ((arrOfStr[2].charAt(0)).isDigit('0')) {
-	    	
 	    }
         
         String operand1 = arrOfStr[0];

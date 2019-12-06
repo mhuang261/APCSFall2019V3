@@ -3,6 +3,7 @@
 //code produces a calculator that intakes two fractions of any form and calculates the result given an operator
 package fracCalc;
 import java.util.*;
+import java.lang.Character;
 
 public class FracCalc {
 
@@ -23,24 +24,40 @@ public class FracCalc {
 
     public static String produceAnswer(String input) { 
     	
-        String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2       
-        String[] errHand = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        String[] opOnly = {arrOfStr[0], arrOfStr[2]};   	   
+        String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2 
+        
+        String[] op0split = arrOfStr[0].split("/");
+        String[] op2split = arrOfStr[2].split("/");
+        
+        String[] op0split1 = op0split[0].split("_");
+        String[] op0split2 = op0split[1].split("_");
+        String[] op2split1 = arrOfStr[0].split("_");
+        String[] op2split2 = arrOfStr[1].split("_");
 
-        for (int i = 0; i < errHand.length; i++) {//runs 20 times
-    		for (int j = 0; j < opOnly.length; j++) {
-    			//if (opOnly[j] != errHand[i]) {
-    			//	return "ERROR: Letters Detected.";
-    			//}
-    		}
-    	} 
-    	if (!(arrOfStr[1]).equals("+") && !(arrOfStr[1]).equals("-") && !(arrOfStr[1]).equals("/") && !(arrOfStr[1]).equals("*")){
-    		return "ERROR: Invalid Format Detected.";
-        }else if (arrOfStr.length != 3 ) {
-	       	return "ERROR: More Than Two Operations Detected.";
-	    }else if (Integer.parseInt(arrOfStr[2]) == 0 && arrOfStr[1].equals("/")) {
+        
+        
+        for (int i = 0; i < arrOfStr[0].length(); i++) {
+        	if (Character.isDigit((arrOfStr[0]).charAt(i)) == false) {
+        		return "ERROR";
+        	}
+        }
+        
+        for (int i = 0; i < arrOfStr[2].length(); i++) {
+        	if (Character.isDigit((arrOfStr[2]).charAt(i)) == false) {
+        		
+        	}
+        }
+
+        if (arrOfStr.length != 3 ) {
+	       	return "ERROR: Invalid Format Detected.";
+	    }else if (arrOfStr[2].equals("0") && arrOfStr[1].equals("/")) {
 	        return "ERROR: Cannot Divide By Zero.";
-	    }
+	    }else if (!(arrOfStr[1]).equals("+") && !(arrOfStr[1]).equals("-") && !(arrOfStr[1]).equals("/") && !(arrOfStr[1]).equals("*")){
+    		return "ERROR: Invalid Format Detected.";
+        } 
+        
+        String[] opOnly = {arrOfStr[0], arrOfStr[2]};
+        
         
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];

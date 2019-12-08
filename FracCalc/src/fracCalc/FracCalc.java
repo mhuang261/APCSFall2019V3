@@ -38,15 +38,15 @@ public class FracCalc {
         //ERROR HANDLING FOR LETTERS
         String[] splitter1 = arrOfStr[0].split("_");//splits op1 to numbers
         String[] splitter2 = new String [splitter1.length];
-        //1st
+        
         for (int i = 0; i < splitter1.length; i++) {
         	if (splitter1[i].contains("/")) {
-        	   splitter2 = splitter1[i].split("/"); //splits op1 further if h + 7, than splitter3 = [h]
+        	   splitter2 = splitter1[i].split("/"); //splits op1 further if h_1/2, then h, 1, 2
         	}
         }
-   
-        for (int i = 0; i < splitter2.length - 1; i++) {// will run three times, for 5, 1, 3
-        	if (Character.isDigit(splitter2[i].charAt(i)) == false) {
+
+        for (int i = 0; i < splitter2.length - 1; i++) {// will run 2 times
+        	if (Character.isDigit(splitter2[i].charAt(0)) == false && !(splitter1[0]).contains("-") || Character.isDigit(splitter1[0].charAt(0)) == false && !(splitter1[0]).contains("-")) {
         		return "ERROR: Invalid Format Detected";
         	}
         }
@@ -60,24 +60,24 @@ public class FracCalc {
         	}
         }
         for (int i = 0; i < splitter4.length - 1; i++) {// will run three times, for 5, 1, 3
-        	if (Character.isDigit(splitter4[i].charAt(i)) == false) {
+        	if (Character.isDigit(splitter4[i].charAt(0)) == false && !(splitter3[0]).contains("-")) {
         		return "ERROR: Invalid Format Detected";
         		}
-        	}
-        
+        	}       
       //checks for length of 1
-        if (splitter2.length == 1) {// if reqs are met for a negative or zero in the first slot 
-        	if (Character.isDigit(splitter1[0].charAt(0)) == false && Character.isDigit(splitter2[0].charAt(1)) == false) {// check if index 0 is false
+        if (splitter2.length == 1 && !(splitter2[0]).contains("-")) {// if reqs are met for a negative or zero in the first slot 
+        	if (Character.isDigit(splitter1[0].charAt(0)) == false && Character.isDigit(splitter1[0].charAt(1)) == false || Character.isDigit(splitter3[0].charAt(0)) == false && !(splitter3[0]).contains("-")) {// check if index 0 is false
         		return "ERROR: Invalid Format Detected";
         	}
-        }else if ((splitter4[0]).contains("-")) {
-        	if (Character.isDigit(splitter4[1].charAt(0)) == false) {// check if index 0 is false
+        }
+        else if ((splitter2[0]).contains("-")) {
+        	if (Character.isDigit(splitter2[1].charAt(0)) == false) {// check if index 0 is false
         		return "ERROR: Invalid Format Detected";
         	}
         }
         
         if (splitter4.length == 1) {// if reqs are met for a negative or zero in the first slot 
-        	if (Character.isDigit(splitter3[0].charAt(0)) == false && Character.isDigit(splitter4[0].charAt(1)) == false) {// check if index 0 is false
+        	if (Character.isDigit(splitter3[0].charAt(0)) == false && Character.isDigit(splitter3[0].charAt(1)) == false) {// check if index 0 is false
         		return "ERROR: Invalid Format Detected";
         	}
         }else if ((splitter4[0]).contains("-")) {
@@ -85,9 +85,7 @@ public class FracCalc {
         		return "ERROR: Invalid Format Detected";
         	}
         } 
-  
-     //END OF ERROR HANDLING
-        
+     //END OF ERROR HANDLING       
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
         String operand2 = arrOfStr[2];

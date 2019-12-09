@@ -44,7 +44,7 @@ public class Calculate {
 	}// this method calculates a quadratic equation in its standard form
 
 	public static String foil(int a, int b, int c, int d, String n) {
-		return (a * c + "n^" + a + " + " + (a * d + b * c + "n ") + "+ " + b * d);
+		return (a * c + "n^" + 2 + " + " + (a * d + b * c + "n ") + "+ " + b * d);
 	}// need to add string to method and call
 
 	// end of part 1
@@ -110,9 +110,9 @@ public class Calculate {
 
 	public static double round2(double answer) {
 
-		answer = answer * 100 - 0.5;
+		answer = answer * 100.0 + 0.5;
 		answer = (int) answer;
-		answer = answer / 100;
+		answer = answer / 100.0;
 		return answer;
 
 	}// end of part 2
@@ -123,25 +123,21 @@ public class Calculate {
 		
 		if (expo <0 || base <0) {
 			throw new IllegalArgumentException();
-			
 		}
 		
-		if (expo == 0 && base != 0) {
-			return 1;
-			
+		if (expo == 0 && base != 0 || base == 1) {
+			return 1;	
 		}
 		
 		if (expo == 0 && base == 0) {
-			return 0;
+			throw new IllegalArgumentException();
 		}
-		 
+		
 		for (int i = 0; i < expo; i++) { // if b = 2 and e = 3 then will run 3 times
 			answer = answer + 1 * base; //1*2, then 2*2 then 4*2
-
+			
 		}
 		return answer;
-		
-
 		}// calculate factorial of an integer
 
 	public static int factorial(int fact) {
@@ -188,6 +184,9 @@ public class Calculate {
 		}else {
 			smaller = b;
 		}
+		if (a == b) {
+			greatestcommon = a;
+		}
 
 		if ( a<1 || b<1 ) {//if a or b is less than 1, execute code for negative gcf
 			
@@ -199,39 +198,31 @@ public class Calculate {
 				}
 			}
 		}
-		
+		//regular gcf code
 		for (int i = 1; i >= smaller; i++) {
 			if (a % i == 0 && b % i == 0) {
 				greatestcommon = i;
-			} 
+			}
 		}
 		return greatestcommon;
 
 	}//accounts for square root of a value
 
-	public static double sqrt(double input) {
+	public static double sqrt(double input) {	
+		double guess = 100.0;
 		
-		double guess = 100;
-		
-if (input<0) {
-			
+if (input<0) { 		
 			throw new IllegalArgumentException("No negative square roots.");
 			
 		} else if (input == 0) {
 			return guess = 0;
 		}
-
-		
-		while (absValue(input-guess*guess) > .005) {
+	
+		while (absValue(input-(guess*guess)) > .005) {
+			guess = 0.5 * (((input/guess) + guess));	
 			
-
-			guess = 0.5 * (input/guess + guess);
-			
-			
-		}
-		
-		return guess;
-		
+		}	
+		return round2(guess);	
 		
 		}
 	
@@ -254,12 +245,12 @@ if (input<0) {
 			double rounding1 = round2(dis);
 			double rounding2 = round2(dis2);
 			
-			return rounding1 + " and " + rounding2;
+			return rounding2 + " and " + rounding1;
 			
 		}else if (discriminant(a, b, c) < 0 ) {
 			throw new IllegalArgumentException("No real roots.");
 			
-		}else throw new IllegalArgumentException("not accepted characters!"); 
+		}else throw new IllegalArgumentException("Not accepted characters!"); 
 
 		
 	}

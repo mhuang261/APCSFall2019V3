@@ -35,13 +35,17 @@ public class FracCalc {
         } 
 
         //ERROR HANDLING FOR LETTERS
-        //String[] splitter1 = arrOfStr[0].split("_");//splits op1 to numbers
-        //String[] splitter2 = new String [splitter1.length];  
-       // handling1(splitter1, splitter2, arrOfStr);
+        String[] splitter1 = arrOfStr[0].split("_");//splits op1 to numbers
+        String[] splitter2 = new String [splitter1.length];  
+        if (handling1(splitter1, splitter2, arrOfStr) == false) {
+        	return ("ERROR: Invalid Answer Format");
+        }
         //2nd
-        //String[] splitter3 = arrOfStr[2].split("_");//if -5_1/3 is now -5, 1/3
-       // String[] splitter4 = new String [splitter3.length];
-       // handling1(splitter3, splitter4, arrOfStr);
+        String[] splitter3 = arrOfStr[2].split("_");//if -5_1/3 is now -5, 1/3
+        String[] splitter4 = new String [splitter3.length];
+        if (handling1(splitter3, splitter4, arrOfStr) == false) {
+        	return ("ERROR: Invalid Answer Format");
+        }
    
      //END OF ERROR HANDLING       
         String operand1 = arrOfStr[0];
@@ -338,22 +342,28 @@ public class FracCalc {
         	
         	return answer;
         }      	
-            public static String handling1 (String[] a, String[] b, String[] arrOfStr) {
+            public static boolean handling1 (String[] a, String[] b, String[] arrOfStr) {
             	//ERROR HANDLING FOR LETTERS
+            	boolean handler = true;
                 for (int i = 0; i < a.length; i++) {
                 	if (a[i].contains("/")) {
                 	   b = a[i].split("/"); //splits op1 further if h_1/2, then h, 1, 2
                 	}// for 5_2/2o,{ b is 2, 2o,} {a is 5, 2/2o}
                 }
-                
-                for (int i = 0; i < b.length; i++) { //traverses array
-                	for (int j = 0; j < b[i].length() - 1; i++) {//traverses each index and traverses the char
-                	if (Character.isDigit(b[i].charAt(j)) == false) {
-                		throw new IllegalArgumentException("a");
-                		}
-                	}
-                }
-				return "";
-				
+                char[] chars = {};
+                for (int i = 0; i < b.length; i++) { //traverses array, runs two times
+                    chars = b[i].toCharArray();
+                    for (char c : chars) {
+                        if(!Character.isLetter(c)) {
+                        	handler = false;
+                        	return handler;
+                        }else {
+                        	handler = false;
+                        }
+                    }
             }
-		}
+				return handler;
+            }     
+            }
+
+

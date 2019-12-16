@@ -43,10 +43,11 @@ public class FracCalc {
         //2nd
         String[] splitter3 = arrOfStr[2].split("_");//if -5_1/3 is now -5, 1/3
         String[] splitter4 = new String [splitter3.length];
+
         if (handling1(splitter3, splitter4, arrOfStr) == false) {
         	return ("ERROR: Invalid Answer Format");
-        }
-   
+    	}
+     
      //END OF ERROR HANDLING       
         String operand1 = arrOfStr[0];
         String operator = arrOfStr[1];
@@ -343,27 +344,23 @@ public class FracCalc {
         	return answer;
         }      	
             public static boolean handling1 (String[] a, String[] b, String[] arrOfStr) {
-            	//ERROR HANDLING FOR LETTERS
-            	boolean handler = true;
+            	 //ERROR HANDLING FOR LETTERS
+                boolean handler = true;
                 for (int i = 0; i < a.length; i++) {
-                	if (a[i].contains("/")) {
-                	   b = a[i].split("/"); //splits op1 further if h_1/2, then h, 1, 2
-                	}// for 5_2/2o,{ b is 2, 2o,} {a is 5, 2/2o}
+                    if (a[i].contains("/")) {
+                       b = a[i].split("/"); //splits op1 further if h_1/2, then h, 1, 2
+                    }// for 5_2/2o,{ b is 2, 2o,} {a is 5, 2/2o}
                 }
                 char[] chars = {};
                 for (int i = 0; i < b.length; i++) { //traverses array, runs two times
                     chars = b[i].toCharArray();
-                    for (char c : chars) {
-                        if(!Character.isLetter(c)) {
-                        	handler = false;
-                        	return handler;
-                        }else {
-                        	handler = false;
+                    for (char c : chars) {//traverses the characters and looks checks if its a letter or not
+                        if(Character.isLetter(c)) {
+                            handler = false;
+                            return handler;
                         }
                     }
             }
-				return handler;
-            }     
+                return true;
             }
-
-
+     }

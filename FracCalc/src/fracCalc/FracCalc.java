@@ -24,7 +24,6 @@ public class FracCalc {
 
     public static String produceAnswer(String input) {  	
         String[] arrOfStr = input.split(" "); //test with 1/2 + 5 1/2 
-        handling1(arrOfStr, arrOfStr, arrOfStr);
         // ERROR HANDLING
         if (arrOfStr.length != 3 ) {
 	       	return "ERROR: Invalid Format Detected.";
@@ -37,15 +36,15 @@ public class FracCalc {
         //ERROR HANDLING FOR LETTERS
         String[] splitter1 = arrOfStr[0].split("_");//splits op1 to numbers
         String[] splitter2 = new String [splitter1.length];  
-        if (handling1(splitter1, splitter2, arrOfStr) == false) {
-        	return ("ERROR: Invalid Answer Format");
+        if (handling1(splitter1, splitter2, arrOfStr) == true) {
+        	return ("1ERROR: Invalid Answer Format");
         }
         //2nd
         String[] splitter3 = arrOfStr[2].split("_");//if -5_1/3 is now -5, 1/3
         String[] splitter4 = new String [splitter3.length];
 
-        if (handling1(splitter3, splitter4, arrOfStr) == false) {
-        	return ("ERROR: Invalid Answer Format");
+        if (handling1(splitter3, splitter4, arrOfStr) == true) {
+        	return ("2ERROR: Invalid Answer Format");
     	}
      
      //END OF ERROR HANDLING       
@@ -349,10 +348,12 @@ public class FracCalc {
                 for (int i = 0; i < a.length; i++) {
                     if (a[i].contains("/")) {
                        b = a[i].split("/"); 
+                    }else {
+                       b = a;
                     }
                 }
                 for (String s : b) {// s = 2h2h, 7
-                	if(!isInt(s) == false) {
+                	if(isInt(s) != false) {
                 		return false;
                 	}
                 }
@@ -361,16 +362,19 @@ public class FracCalc {
             
 			public static boolean isInt(String num) {
 			String num2 = "";
-			if (num.equals("")) {
-        		return false;
-        	}
-			
+			//if (num.equals("")) {
+        	//	return false;
+        	//}
 			if(num.charAt(0) == '-') {
 				num2 = num.substring(2);	//cuts out first if its a -
+				for (int i = 0; i < num2.length(); i++) {
+					if (Character.isDigit(num2.charAt(i)) != true) {
+						return false;
+						}
+					}
 			}
 			for (int i = 0; i < num.length(); i++) {
-			
-			if (!Character.isDigit(num.charAt(i)) == true) {
+			if (Character.isDigit(num.charAt(i)) != true) {
 				return false;
 				}
 			}

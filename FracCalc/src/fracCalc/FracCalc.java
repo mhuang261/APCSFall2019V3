@@ -348,19 +348,32 @@ public class FracCalc {
                 boolean handler = true;
                 for (int i = 0; i < a.length; i++) {
                     if (a[i].contains("/")) {
-                       b = a[i].split("/"); //splits op1 further if h_1/2, then h, 1, 2
-                    }// for 5_2/2o,{ b is 2, 2o,} {a is 5, 2/2o}
-                }
-                char[] chars = {};
-                for (int i = 0; i < b.length; i++) { //traverses array, runs two times
-                    chars = b[i].toCharArray();
-                    for (char c : chars) {//traverses the characters and looks checks if its a letter or not
-                        if(Character.isLetter(c)) {
-                            handler = false;
-                            return handler;
-                        }
+                       b = a[i].split("/"); 
                     }
-            }
+                }
+                for (String s : b) {// s = 2h2h, 7
+                	if(!isInt(s) == false) {
+                		return false;
+                	}
+                }
                 return true;
             }
-     }
+            
+			public static boolean isInt(String num) {
+			String num2 = "";
+			if (num.equals("")) {
+        		return false;
+        	}
+			
+			if(num.charAt(0) == '-') {
+				num2 = num.substring(2);	//cuts out first if its a -
+			}
+			for (int i = 0; i < num.length(); i++) {
+			
+			if (!Character.isDigit(num.charAt(i)) == true) {
+				return false;
+				}
+			}
+			return true;
+			}
+	}

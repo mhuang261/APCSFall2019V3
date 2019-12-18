@@ -362,19 +362,21 @@ public class FracCalc {
             
 			public static boolean isInt(String num) {
 			String num2 = "";
-			//if (num.equals("")) {
-        	//	return false;
-        	//}
+			if (num.equals("")) {
+        		return false;
+        	}
 			if(num.charAt(0) == '-') {
-				num2 = num.substring(2);	//cuts out first if its a -
+				num2 = num.substring(1);	//cuts out first if its a -
+				
 				for (int i = 0; i < num2.length(); i++) {
-					if (Character.isDigit(num2.charAt(i)) != true) {
+					if (Character.isDigit(num2.charAt(i)) != true) {			            
 						return false;
 						}
 					}
+
 			}
-			for (int i = 0; i < num.length(); i++) {
-			if (Character.isDigit(num.charAt(i)) != true) {
+			for (int i = 0; i < num2.length(); i++) {
+			if (Character.isDigit(num2.charAt(i)) != true) {
 				return false;
 				}
 			}

@@ -6,7 +6,6 @@ import java.util.*;
 import java.lang.Character;
 
 public class FracCalc {
-
       public static void main(String[] args) 
     {
     	Scanner console = new Scanner(System.in);
@@ -37,14 +36,14 @@ public class FracCalc {
         String[] splitter1 = arrOfStr[0].split("_");//splits op1 to numbers
         String[] splitter2 = new String [splitter1.length];  
         if (handling1(splitter1, splitter2, arrOfStr) == true) {
-        	return ("1ERROR: Invalid Answer Format");
+        	return ("ERROR: Invalid Answer Format");
         }
         //2nd
         String[] splitter3 = arrOfStr[2].split("_");//if -5_1/3 is now -5, 1/3
         String[] splitter4 = new String [splitter3.length];
 
         if (handling1(splitter3, splitter4, arrOfStr) == true) {
-        	return ("2ERROR: Invalid Answer Format");
+        	return ("ERROR: Invalid Answer Format");
     	}
      
      //END OF ERROR HANDLING       
@@ -144,7 +143,6 @@ public class FracCalc {
 			num1Int = mixImp(whole1Int, num1Int, denom1Int);
 			
        //TESTING FOR OPERATORS
-       
        if (operator.equals("+") || operator.equals("-")) {
            return addSub(num1Int, num2Int, denom1Int, denom2Int, operator);   
     	   
@@ -156,7 +154,6 @@ public class FracCalc {
        }
     }  
     //EXTRA METHODS GO HERE
-    
     	//MIXED TO IMPROPER (5_1/2 --> 11/2)
     	public static int mixImp (int whole, int num, int denom) {
     		int improperNum = 0;
@@ -168,7 +165,7 @@ public class FracCalc {
        		return improperNum; 
     	}
     	
-    	//CHECKS FOR OPERATOR FUNCTIONS
+    	//CHECKS FOR OPERATOR FUNCTIONS (turns answers back into strings)
     	public static String opChecks (int whole, int remain, int lcm, int sumOrDiff) {
     		int tester = 0;
     		
@@ -373,7 +370,6 @@ public class FracCalc {
 						return false;
 						}
 					}
-
 			}
 			for (int i = 0; i < num2.length(); i++) {
 			if (Character.isDigit(num2.charAt(i)) != true) {

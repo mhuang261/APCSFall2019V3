@@ -1,13 +1,12 @@
 //Michael Huang
 //11/5/19 APCS 3rd
 //code produces a calculator that intakes two fractions of any form and calculates the result given an operator
-package fracCalc;
+package fracCalcFall;
 import java.util.*;
 import java.lang.Character;
 
-public class FracCalc {
-      public static void main(String[] args) 
-    {
+public class FracCalcFall {
+      public static void main(String[] args) {
     	Scanner console = new Scanner(System.in);
     	String quit = "";
     	String ans = "";

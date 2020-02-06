@@ -1,10 +1,9 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ThereAndBackAgain 
-{
+public class ThereAndBackAgain {
 
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		
 		Hobbit frodo = new Hobbit("Frodo");
 		Hobbit sam = new Hobbit("Sam");
@@ -26,11 +25,39 @@ public class ThereAndBackAgain
 				System.out.println(party1[i].getName() + " has traveled " + party1[i].getDistanceTraveled() + " miles.");
 			}
 		
-		
-		
-		System.out.println();
+			System.out.println("\n\n\nPART 2: \n");
 
+			String[] dwarfNames = {"Fili", "Kili", "Dori", "Ori", "Nori", "Balin", "Dwalin",
+			"Oin", "Gloin", "Bifur", "Bofur", "Bombur", "Thorin"};
+			
+			ArrayList <Traveler> party2 = new ArrayList<>(3);
+			
+			Hobbit bilbo = new Hobbit("Bilbo");
+			party2.add(bilbo);
+			//make a new hobbit named bilbo and add him to party2
+			Wizard gandalf = new Wizard("Gandalf", "grey");
+			//make a new wizard named gandalf and add him to party2
+			party2.add(gandalf);
+			
+			createParty(party2, dwarfNames);
+			
+			System.out.println(party2.toString());
 	}
+			//write createParty
+			public static void createParty(ArrayList<Traveler> a, String[] b) {
+				for (int i = 0; i < b.length; i++) {
+					Dwarf c = new Dwarf(b[i]); 
+					a.add(c);
+				}
+			}
+			
+			// Call the createParty method and pass it party2 and the dwarfNames array.
 
-	
-}
+			// create party should add all the new dwarves to party2,
+
+			//Write allTravel
+			// Finally, call the allTravel method passing it party2 and 100 (representing
+			// the 100 miles that party2 has traveled together.
+
+			//Make sure your code prints out the name and distances party2 has traveled.
+	}

@@ -14,8 +14,8 @@ public class Wizard extends Traveler
 	
 	public Wizard(String name, String color)
 	{
-		this.getName();
-		color = "none";
+		super(name);
+		this.color = color;
 	}
 	
 	public void travel(int miles)
@@ -25,6 +25,7 @@ public class Wizard extends Traveler
 	
 	public String getName()
 	{
+		return super.getName() + " the " + color;
 		
 	}
 }

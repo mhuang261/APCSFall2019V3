@@ -9,9 +9,5 @@ public class Dwarf extends Traveler
 	public Dwarf(String name)
 	{
 		super(name); //no travel method 
-		
 	}
-
-	
-
 }

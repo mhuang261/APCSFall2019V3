@@ -35,14 +35,21 @@ public class ThereAndBackAgain {
 			Hobbit bilbo = new Hobbit("Bilbo");
 			party2.add(bilbo);
 			//make a new hobbit named bilbo and add him to party2
-			Wizard gandalf = new Wizard("Gandalf", "grey");
+			Wizard gandalf = new Wizard("Gandalf", "Grey");
 			//make a new wizard named gandalf and add him to party2
 			party2.add(gandalf);
 			
 			createParty(party2, dwarfNames);
-			
-			System.out.println(party2.toString());
+			allTravel(party2, 100);
 	}
+			public static void allTravel(ArrayList<Traveler> a, int b) {
+				for (int i = 0; i < a.size(); i++) {
+					(a.get(i)).travel(b);
+					System.out.println(a.get(i).getName() + " traveled " + (a.get(i)).getDistanceTraveled() + " miles.");
+					
+					
+				}
+			}
 			//write createParty
 			public static void createParty(ArrayList<Traveler> a, String[] b) {
 				for (int i = 0; i < b.length; i++) {

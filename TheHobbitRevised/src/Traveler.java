@@ -1,19 +1,16 @@
-
 public class Traveler 
 {
 	//fields
 	private int distanceTraveled;
 	private String name;
-	
-	
+		
 	//constructor
 	public Traveler(String name)
 	{
 		this.distanceTraveled = 0;
 		this.name = name;
 	}
-	
-	
+
 	//methods
 	public int getDistanceTraveled()
 	{

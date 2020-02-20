@@ -1,3 +1,7 @@
+//Michael Huang 2/19/20 
+//APCS 3rd Hobbit Activity
+//getting a band of travelers to travel a certain amount of miles using inheritance and object manipulation
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -45,9 +49,7 @@ public class ThereAndBackAgain {
 			public static void allTravel(ArrayList<Traveler> a, int b) {
 				for (int i = 0; i < a.size(); i++) {
 					(a.get(i)).travel(b);
-					System.out.println(a.get(i).getName() + " traveled " + (a.get(i)).getDistanceTraveled() + " miles.");
-					
-					
+					System.out.println(a.get(i).getName() + " traveled " + (a.get(i)).getDistanceTraveled() + " miles.");		
 				}
 			}
 			//write createParty

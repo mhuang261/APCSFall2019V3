@@ -12,7 +12,4 @@ public class Hobbit extends Traveler
 	{
 		super(name);
 	}
-	
-	
-	
 }
